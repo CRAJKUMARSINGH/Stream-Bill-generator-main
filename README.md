@@ -64,6 +64,7 @@ To enable enhanced features, run `install_enhanced_packages.bat` and then use `L
 2. Use `requirements_basic.txt` for Streamlit Cloud
 3. Use Docker for full-featured deployment
 4. **See `STREAMLIT_CLOUD_DEPLOYMENT_FIX.md` for fixes to common import errors**
+5. **See `DEPLOYMENT_TROUBLESHOOTING.md` for help with deployment issues**
 
 ### General Steps
 1. Upload an Excel file with Work Order, Bill Quantity, and Extra Items sheets
@@ -104,6 +105,7 @@ For advanced features, see `requirements_advanced.txt`.
 - `docs/README_PDF_OPTIMIZATION.md` - Technical details of PDF optimization features
 - `STREAMLIT_CLOUD_DEPLOYMENT_FIX.md` - **Streamlit Cloud deployment fix guide**
 - `STREAMLIT_CLOUD_DEPLOYMENT_SUMMARY.md` - **Streamlit Cloud deployment summary**
+- `DEPLOYMENT_TROUBLESHOOTING.md` - **Troubleshooting guide for deployment issues**
 
 ## Deployment Validation
 
@@ -137,3 +139,11 @@ TEST_STREAMLIT_CLOUD_FIX.bat
 ```
 
 This will verify that all imports work correctly and start the Streamlit app to ensure everything is functioning properly.
+
+## Troubleshooting Deployment Issues
+
+If you encounter deployment issues:
+1. Try deploying the minimal version first (`minimal_app.py`)
+2. Check `DEPLOYMENT_TROUBLESHOOTING.md` for common solutions
+3. Verify your requirements.txt file is properly formatted
+4. Ensure all `__init__.py` files are present
