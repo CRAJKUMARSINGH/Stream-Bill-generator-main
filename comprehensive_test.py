@@ -88,7 +88,8 @@ def verify_code_fixes():
     """Verify that our code fixes are in place"""
     print("\nVerifying code fixes...")
     
-    files_to_check = ["streamlit_app.py", "batch_tester.py"]
+    # Check the core computation module instead of streamlit_app.py
+    files_to_check = ["core/computations/bill_processor.py"]
     
     for filename in files_to_check:
         try:
@@ -130,4 +131,4 @@ if __name__ == "__main__":
     print("- Added safe_float() function for robust float conversion")
     print("- Replaced direct float() calls with safe_float() in critical areas")
     print("- Added proper handling for empty strings, None values, and invalid inputs")
-    print("- Applied fixes to both streamlit_app.py and batch_tester.py")
+    print("- Applied fixes to core/computations/bill_processor.py (modular structure)")

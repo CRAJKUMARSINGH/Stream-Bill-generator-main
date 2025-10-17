@@ -1,5 +1,5 @@
 """
-Test basic functionality of the bill generator
+Test basic functionality of the bill generator (Updated for Modular Structure)
 """
 import os
 import sys
@@ -9,24 +9,25 @@ def test_imports():
     print("Testing imports...")
     
     try:
-        import streamlit_app
-        print("✓ streamlit_app imported successfully")
+        # Test new modular structure
+        from app.main import main
+        print("✓ app/main.py imported successfully")
     except Exception as e:
-        print(f"✗ Failed to import streamlit_app: {e}")
+        print(f"✗ Failed to import app/main.py: {e}")
         return False
     
     try:
-        import enhanced_batch_tester
-        print("✓ enhanced_batch_tester imported successfully")
+        from core.computations.bill_processor import process_bill, safe_float, number_to_words
+        print("✓ core/computations/bill_processor.py imported successfully")
     except Exception as e:
-        print(f"✗ Failed to import enhanced_batch_tester: {e}")
+        print(f"✗ Failed to import core/computations/bill_processor.py: {e}")
         return False
         
     try:
-        import validate_and_process_tests
-        print("✓ validate_and_process_tests imported successfully")
+        from exports.renderers import generate_pdf, create_word_doc
+        print("✓ exports/renderers.py imported successfully")
     except Exception as e:
-        print(f"✗ Failed to import validate_and_process_tests: {e}")
+        print(f"✗ Failed to import exports/renderers.py: {e}")
         return False
     
     return True
@@ -36,17 +37,20 @@ def test_function_imports():
     print("\nTesting function imports...")
     
     try:
-        from streamlit_app import process_bill
+        from core.computations.bill_processor import process_bill
         print("✓ process_bill function imported successfully")
     except Exception as e:
         print(f"✗ Failed to import process_bill: {e}")
         return False
     
     try:
-        from enhanced_batch_tester import process_single_excel_file
-        print("✓ process_single_excel_file function imported successfully")
+        # Check if enhanced_batch_tester exists, if not, that's okay
+        import enhanced_batch_tester
+        print("✓ enhanced_batch_tester module imported successfully")
+    except ImportError:
+        print("⚠ enhanced_batch_tester not found (this is okay)")
     except Exception as e:
-        print(f"✗ Failed to import process_single_excel_file: {e}")
+        print(f"✗ Error importing enhanced_batch_tester: {e}")
         return False
     
     return True
@@ -72,8 +76,8 @@ def check_test_files():
 
 def main():
     """Main test function"""
-    print("Stream Bill Generator - Basic Functionality Test")
-    print("=" * 50)
+    print("Stream Bill Generator - Basic Functionality Test (Modular Version)")
+    print("=" * 60)
     print()
     
     # Test imports

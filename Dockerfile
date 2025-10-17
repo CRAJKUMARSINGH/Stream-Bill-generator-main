@@ -60,4 +60,4 @@ USER user
 WORKDIR /app
 
 # Run the application
-ENTRYPOINT ["streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "app/main.py", "--server.port=8503", "--server.address=0.0.0.0"]

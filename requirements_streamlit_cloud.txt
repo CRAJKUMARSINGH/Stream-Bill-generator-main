@@ -1,0 +1,34 @@
+# Streamlit Cloud Compatible Requirements
+# Optimized for cloud deployment without system dependencies
+
+# Core
+streamlit>=1.28.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+numpy>=1.24.0
+
+# Document Generation
+python-docx>=0.8.11
+jinja2>=3.1.2
+
+# PDF Generation - Cloud Compatible
+# WeasyPrint (best quality, but requires system dependencies - NOT compatible with Streamlit Cloud)
+# weasyprint>=60.0
+
+# Fallback PDF engines - Cloud Compatible
+xhtml2pdf>=0.2.11
+reportlab>=4.0.0
+
+# Alternative: pdfkit (requires wkhtmltopdf binary)
+# pdfkit>=1.0.0
+
+# Utilities
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+num2words>=0.5.12
+
+# Performance
+Pillow>=10.0.0
+
+# Optional: If deploying with Docker or custom server
+# playwright>=1.40.0  # Requires additional setup

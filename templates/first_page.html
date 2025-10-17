@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .header { margin-bottom: 20px; }
+        .totals { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Contractor Bill - First Page</h1>
+        {% for row in data.header %}
+        <p>{{ row[0] }}: {{ row[1] }}</p>
+        {% endfor %}
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data.items %}
+            <tr>
+                <td>{{ item.serial_no }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.rate }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.remark }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="totals">
+        <p><strong>Grand Total:</strong> {{ data.totals.grand_total }}</p>
+        <p><strong>Tender Premium:</strong> {{ data.totals.premium.amount }}</p>
+        <p><strong>Payable Amount:</strong> {{ data.totals.payable }}</p>
+    </div>
+</body>
+</html>

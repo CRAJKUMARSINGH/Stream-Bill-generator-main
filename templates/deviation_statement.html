@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deviation Statement</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .header { margin-bottom: 20px; }
+        .summary { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Deviation Statement</h1>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Qty WO</th>
+                <th>Rate</th>
+                <th>Amt WO</th>
+                <th>Qty Bill</th>
+                <th>Amt Bill</th>
+                <th>Excess Qty</th>
+                <th>Excess Amt</th>
+                <th>Saving Qty</th>
+                <th>Saving Amt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data.items %}
+            <tr>
+                <td>{{ item.serial_no }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.qty_wo }}</td>
+                <td>{{ item.rate }}</td>
+                <td>{{ item.amt_wo }}</td>
+                <td>{{ item.qty_bill }}</td>
+                <td>{{ item.amt_bill }}</td>
+                <td>{{ item.excess_qty }}</td>
+                <td>{{ item.excess_amt }}</td>
+                <td>{{ item.saving_qty }}</td>
+                <td>{{ item.saving_amt }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="summary">
+        <p><strong>Work Order Total:</strong> {{ data.summary.work_order_total }}</p>
+        <p><strong>Executed Total:</strong> {{ data.summary.executed_total }}</p>
+        <p><strong>Overall Excess:</strong> {{ data.summary.overall_excess }}</p>
+        <p><strong>Overall Saving:</strong> {{ data.summary.overall_saving }}</p>
+    </div>
+</body>
+</html>

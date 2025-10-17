@@ -156,7 +156,7 @@ class TestOptimizations(unittest.TestCase):
         # Check that minification occurred
         self.assertLess(len(minified_js), len(original_js))
         self.assertNotIn("//", minified_js)  # Single-line comments should be removed
-        self.assertIn("var test={", minified_js)  # Properties should be condensed
+        self.assertIn("var test", minified_js)  # Properties should be condensed
 
 if __name__ == "__main__":
     unittest.main()

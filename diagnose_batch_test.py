@@ -18,15 +18,23 @@ def check_files():
     """Check if required files exist"""
     print("=== File Check ===")
     required_files = [
-        "streamlit_app.py",
-        "enhanced_batch_tester.py",
-        "validate_and_process_tests.py",
+        "app/main.py",  # Updated for modular structure
+        "core/computations/bill_processor.py",  # Core module
+        "exports/renderers.py",  # Export module
         "requirements.txt"
     ]
     
     for file in required_files:
         exists = os.path.exists(file)
         print(f"{'✓' if exists else '✗'} {file}: {'Found' if exists else 'Missing'}")
+    
+    # Also check templates
+    template_dir = "templates"
+    if os.path.exists(template_dir):
+        templates = os.listdir(template_dir)
+        print(f"✓ {template_dir}: Found ({len(templates)} templates)")
+    else:
+        print(f"✗ {template_dir}: Missing")
     
     print()
 

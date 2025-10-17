@@ -1,5 +1,5 @@
 """
-Comprehensive Streamlit Deployment Test Script
+Comprehensive Streamlit Deployment Test Script (Updated for Modular Structure)
 """
 import subprocess
 import sys
@@ -23,10 +23,11 @@ def check_python_environment():
         return False
     
     # Check if in correct directory
-    if not os.path.exists("streamlit_app.py"):
-        print("  ❌ streamlit_app.py not found in current directory")
+    if not os.path.exists("app/main.py"):
+        print("  ❌ app/main.py not found in current directory")
+        print("  Looking for new modular structure...")
         return False
-    print("  ✅ streamlit_app.py found")
+    print("  ✅ app/main.py found (new modular structure)")
     
     # Check templates directory
     if not os.path.exists("templates"):
@@ -133,56 +134,66 @@ def check_wkhtmltopdf():
     
     return wkhtmltopdf_found
 
-def test_import_streamlit_app():
-    """Test if streamlit_app.py can be imported without errors"""
-    print("\n5. Testing Streamlit App Import")
+def test_import_modular_app():
+    """Test if the new modular app can be imported without errors"""
+    print("\n5. Testing Modular App Import")
     print("-" * 30)
     
     try:
         # Add current directory to Python path
         sys.path.insert(0, os.getcwd())
         
-        # Try to import the app
-        import streamlit_app
-        print("  ✅ streamlit_app.py imported successfully")
+        # Try to import the app modules
+        from app.main import main
+        print("  ✅ app/main.py imported successfully")
         
-        # Try to access key functions
-        if hasattr(streamlit_app, 'process_bill'):
-            print("  ✅ process_bill function available")
-        else:
-            print("  ⚠️  process_bill function not found")
-            
-        if hasattr(streamlit_app, 'generate_pdf'):
-            print("  ✅ generate_pdf function available")
-        else:
-            print("  ⚠️  generate_pdf function not found")
+        # Try to import core modules
+        from core.computations.bill_processor import process_bill, safe_float, number_to_words
+        print("  ✅ core/computations/bill_processor.py imported successfully")
+        
+        # Try to import export modules
+        from exports.renderers import generate_pdf, create_word_doc
+        print("  ✅ exports/renderers.py imported successfully")
             
         return True
         
     except Exception as e:
-        print(f"  ❌ Error importing streamlit_app.py: {e}")
+        print(f"  ❌ Error importing modular app: {e}")
         import traceback
         print(f"  Traceback: {traceback.format_exc()}")
         return False
 
-def run_streamlit_syntax_check():
-    """Run Python syntax check on streamlit_app.py"""
+def run_modular_syntax_check():
+    """Run Python syntax check on modular app files"""
     print("\n6. Checking Python Syntax")
     print("-" * 24)
     
-    try:
-        result = subprocess.run([sys.executable, "-m", "py_compile", "streamlit_app.py"],
-                              capture_output=True, text=True, timeout=30)
-        if result.returncode == 0:
-            print("  ✅ streamlit_app.py syntax is correct")
-            return True
+    files_to_check = [
+        "app/main.py",
+        "core/computations/bill_processor.py",
+        "exports/renderers.py"
+    ]
+    
+    all_passed = True
+    for file_path in files_to_check:
+        if os.path.exists(file_path):
+            try:
+                result = subprocess.run([sys.executable, "-m", "py_compile", file_path],
+                                      capture_output=True, text=True, timeout=30)
+                if result.returncode == 0:
+                    print(f"  ✅ {file_path} syntax is correct")
+                else:
+                    print(f"  ❌ {file_path} has syntax errors:")
+                    print(f"    {result.stderr}")
+                    all_passed = False
+            except Exception as e:
+                print(f"  ❌ Syntax check for {file_path} failed: {e}")
+                all_passed = False
         else:
-            print("  ❌ streamlit_app.py has syntax errors:")
-            print(f"    {result.stderr}")
-            return False
-    except Exception as e:
-        print(f"  ❌ Syntax check failed: {e}")
-        return False
+            print(f"  ❌ {file_path} not found")
+            all_passed = False
+    
+    return all_passed
 
 def test_jinja2_templates():
     """Test if Jinja2 templates can be loaded"""
@@ -206,76 +217,56 @@ def test_jinja2_templates():
                 template = env.get_template(template_name)
                 print(f"  ✅ {template_name} loaded successfully")
             except Exception as e:
-                print(f"  ❌ Error loading {template_name}: {e}")
+                print(f"  ❌ {template_name} failed to load: {e}")
                 return False
-        
-        print("  ✅ All templates loaded successfully")
+                
         return True
-        
     except Exception as e:
         print(f"  ❌ Jinja2 template test failed: {e}")
         return False
 
-def run_comprehensive_test():
-    """Run all tests and provide a comprehensive report"""
-    print("STREAMLIT APP DEPLOYABILITY TEST")
-    print("=" * 35)
-    print()
+def print_deployment_instructions():
+    """Print deployment instructions"""
+    print("\n8. Deployment Instructions")
+    print("-" * 25)
+    print("To run the Streamlit app:")
+    print("  streamlit run app/main.py --server.port 8503")
+    print("\nOr use the provided launch scripts:")
+    print("  🚀_LAUNCH_APP.bat          (Basic version)")
+    print("  LAUNCH_ENHANCED_APP.bat    (Enhanced version)")
+    print("  LAUNCH_STREAMLIT_APP.bat   (Modular version)")
+    print("\nThe app will be available at: http://localhost:8503")
+
+def run_all_tests():
+    """Run all deployment tests"""
+    print("Streamlit Deployment Test Suite (Modular Version)")
+    print("=" * 50)
     
-    # Run all tests
     tests = [
-        ("Python Environment", check_python_environment),
-        ("Dependencies", check_dependencies),
-        ("Template Files", check_template_files),
-        ("wkhtmltopdf", check_wkhtmltopdf),
-        ("App Import", test_import_streamlit_app),
-        ("Syntax Check", run_streamlit_syntax_check),
-        ("Jinja2 Templates", test_jinja2_templates)
+        check_python_environment,
+        check_dependencies,
+        check_template_files,
+        check_wkhtmltopdf,
+        test_import_modular_app,
+        run_modular_syntax_check,
+        test_jinja2_templates
     ]
     
-    results = []
-    for test_name, test_func in tests:
-        try:
-            result = test_func()
-            results.append((test_name, result))
-        except Exception as e:
-            print(f"  ❌ {test_name} test failed with exception: {e}")
-            results.append((test_name, False))
+    all_passed = True
+    for test in tests:
+        if not test():
+            all_passed = False
+        time.sleep(0.5)  # Small delay between tests
     
-    # Summary
-    print("\n" + "=" * 35)
-    print("DEPLOYABILITY TEST SUMMARY")
-    print("=" * 35)
-    
-    passed = sum(1 for _, result in results if result)
-    total = len(results)
-    
-    print(f"Tests passed: {passed}/{total}")
-    
-    if passed == total:
-        print("\n🎉 ALL TESTS PASSED!")
-        print("Your Streamlit app is ready for deployment!")
+    print("\n" + "=" * 50)
+    if all_passed:
+        print("✅ All tests passed! The app is ready for deployment.")
+        print_deployment_instructions()
         return True
     else:
-        print("\n❌ SOME TESTS FAILED!")
-        print("Issues found that need to be addressed:")
-        for test_name, result in results:
-            if not result:
-                print(f"  - {test_name}")
+        print("❌ Some tests failed. Please check the output above.")
         return False
 
-def main():
-    """Main function"""
-    success = run_comprehensive_test()
-    
-    if success:
-        print("\n✅ You can now run your Streamlit app with:")
-        print("   streamlit run streamlit_app.py --server.port 8503")
-    else:
-        print("\n❌ Please fix the issues above before deploying.")
-    
-    return success
-
 if __name__ == "__main__":
-    success = main()
+    success = run_all_tests()
     sys.exit(0 if success else 1)

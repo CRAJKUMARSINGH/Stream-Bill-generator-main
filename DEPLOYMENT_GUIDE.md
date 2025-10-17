@@ -58,7 +58,7 @@ For production deployment with full features, use Docker:
 
 2. Run the container:
    ```
-   docker run -p 8501:8501 stream-bill-generator
+   docker run -p 8503:8503 stream-bill-generator
    ```
 
 ## Environment Detection
@@ -79,3 +79,19 @@ The application supports multiple PDF generation engines with automatic fallback
 4. **pdfkit** (basic but reliable, works in cloud environments)
 
 In cloud environments, only pdfkit is used regardless of what's installed.
+
+## Deployment Validation
+
+Before deploying the application, you can validate that all dependencies are available:
+
+1. Run the validation script:
+   ```
+   VALIDATE_DEPLOYMENT.bat
+   ```
+
+2. The script will check:
+   - Python version requirements
+   - Required and optional modules
+   - Essential files and templates
+
+3. If the validation passes, you can proceed with deployment.

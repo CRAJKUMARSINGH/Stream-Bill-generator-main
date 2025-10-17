@@ -5,15 +5,20 @@ This module provides the UI layer that interacts with the core computation and e
 import streamlit as st
 import pandas as pd
 import os
+import sys
 import tempfile
 from io import BytesIO
 
-# Import our modular components
-from core.computations.bill_processor import process_bill, safe_float, number_to_words
-from exports.renderers import generate_pdf, create_word_doc, merge_pdfs, create_zip_archive
+# Add the parent directory to the path to fix import issues
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
+# Also add the current directory to ensure local imports work
+sys.path.insert(0, current_dir)
 
 # Configuration
-TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
+TEMPLATE_DIR = os.path.join(parent_dir, "templates")
 TEMP_DIR = tempfile.gettempdir()
 
 def main():
@@ -74,6 +79,38 @@ def main():
             if st.button("Generate Documents", type="primary"):
                 with st.spinner("Processing bill and generating documents..."):
                     try:
+                        # Import our modular components inside the function with robust error handling
+                        try:
+                            # Try the standard import first
+                            from core.computations.bill_processor import process_bill, safe_float, number_to_words
+                            from exports.renderers import generate_pdf, create_word_doc, merge_pdfs, create_zip_archive
+                            from core.streamlit_pdf_integration import StreamlitPDFManager
+                        except (ImportError, ModuleNotFoundError) as e:
+                            # Fallback for Streamlit Cloud deployment - adjust path and try again
+                            try:
+                                sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+                                from core.computations.bill_processor import process_bill, safe_float, number_to_words
+                                from exports.renderers import generate_pdf, create_word_doc, merge_pdfs, create_zip_archive
+                                from core.streamlit_pdf_integration import StreamlitPDFManager
+                            except (ImportError, ModuleNotFoundError) as e2:
+                                # Final fallback - try with relative imports
+                                try:
+                                    import core.computations.bill_processor as bill_processor
+                                    import exports.renderers as renderers
+                                    import core.streamlit_pdf_integration as streamlit_pdf_integration
+                                    process_bill = bill_processor.process_bill
+                                    safe_float = bill_processor.safe_float
+                                    number_to_words = bill_processor.number_to_words
+                                    generate_pdf = renderers.generate_pdf
+                                    create_word_doc = renderers.create_word_doc
+                                    merge_pdfs = renderers.merge_pdfs
+                                    create_zip_archive = renderers.create_zip_archive
+                                    StreamlitPDFManager = streamlit_pdf_integration.StreamlitPDFManager
+                                except Exception as e3:
+                                    st.error(f"Failed to import required modules. Please check your deployment configuration.")
+                                    st.exception(e3)
+                                    return
+                        
                         # Process the bill using our core computation logic
                         first_page_data, last_page_data, deviation_data, extra_items_data, note_sheet_data = process_bill(
                             ws_wo, ws_bq, ws_extra, premium_percent, premium_type
@@ -84,55 +121,64 @@ def main():
                             pdf_files = []
                             word_files = []
                             
-                            # Generate First Page
-                            first_page_pdf = generate_pdf(
-                                "First Page", 
-                                first_page_data, 
-                                "landscape", 
-                                TEMPLATE_DIR, 
-                                temp_dir
-                            )
-                            pdf_files.append(first_page_pdf)
+                            # Initialize PDF manager
+                            pdf_manager = StreamlitPDFManager()
                             
-                            # Generate Last Page
-                            last_page_pdf = generate_pdf(
-                                "Last Page", 
-                                last_page_data, 
-                                "portrait", 
-                                TEMPLATE_DIR, 
-                                temp_dir
-                            )
-                            pdf_files.append(last_page_pdf)
+                            # Prepare bill data for PDF generation
+                            bill_data = {
+                                'title': 'Contractor Bill - First Page',
+                                'subtitle': 'Work Order vs Executed Work Comparison',
+                                'items': first_page_data.get('items', []),
+                                'summary': {
+                                    'subtotal': first_page_data['totals'].get('grand_total', 0),
+                                    'premium': first_page_data['totals']['premium'].get('amount', 0),
+                                    'grand_total': first_page_data['totals'].get('payable', 0)
+                                },
+                                'footer': 'This document is computer generated and does not require signature'
+                            }
                             
-                            # Generate Deviation Statement
-                            deviation_pdf = generate_pdf(
-                                "Deviation Statement", 
-                                deviation_data, 
-                                "landscape", 
-                                TEMPLATE_DIR, 
-                                temp_dir
-                            )
-                            pdf_files.append(deviation_pdf)
+                            # PDF configuration
+                            config = {
+                                'orientation': 'landscape',
+                                'margins': {
+                                    'top': 12,
+                                    'right': 12,
+                                    'bottom': 12,
+                                    'left': 12
+                                }
+                            }
                             
-                            # Generate Extra Items
-                            extra_items_pdf = generate_pdf(
-                                "Extra Items", 
-                                extra_items_data, 
-                                "landscape", 
-                                TEMPLATE_DIR, 
-                                temp_dir
-                            )
-                            pdf_files.append(extra_items_pdf)
-                            
-                            # Generate Note Sheet
-                            note_sheet_pdf = generate_pdf(
-                                "Note Sheet", 
-                                note_sheet_data, 
-                                "portrait", 
-                                TEMPLATE_DIR, 
-                                temp_dir
-                            )
-                            pdf_files.append(note_sheet_pdf)
+                            # Generate First Page using optimized PDF generator
+                            try:
+                                first_page_pdf = pdf_manager.generate_bill_pdf(
+                                    bill_data, 
+                                    config, 
+                                    "first_page.pdf"
+                                )
+                                if first_page_pdf:
+                                    pdf_files.append(first_page_pdf)
+                                else:
+                                    # Fallback to original implementation
+                                    st.warning("Optimized PDF generation failed for First Page, using fallback")
+                                    first_page_pdf = generate_pdf(
+                                        "First Page", 
+                                        first_page_data, 
+                                        "landscape", 
+                                        TEMPLATE_DIR, 
+                                        temp_dir
+                                    )
+                                    pdf_files.append(first_page_pdf)
+                            except Exception as e:
+                                # Fallback to original implementation
+                                st.warning(f"Optimized PDF generation failed for First Page, using fallback: {e}")
+                                first_page_pdf = generate_pdf(
+                                    "First Page", 
+                                    first_page_data, 
+                                    "landscape", 
+                                    TEMPLATE_DIR, 
+                                    temp_dir
+                                )
+                                pdf_files.append(first_page_pdf)
                             
                             # Create Word documents
                             first_page_doc = os.path.join(temp_dir, "first_page.docx")
