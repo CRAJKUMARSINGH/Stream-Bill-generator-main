@@ -22,6 +22,10 @@ This guide helps resolve common issues when deploying the Stream Bill Generator 
    - requirements.txt may contain hidden characters or incorrect encoding
    - Solution: Create a clean requirements.txt file with UTF-8 encoding
 
+4. **Comments in packages.txt**
+   - Streamlit Cloud tries to install comments as packages
+   - Solution: Remove all comments from packages.txt
+
 ### 2. Import Errors
 
 **Error Message**: "ModuleNotFoundError: No module named 'core.computations.bill_processor'"
@@ -79,6 +83,9 @@ Ensure all file paths are relative and work in the Streamlit Cloud environment.
 
 ### 4. Handle Imports Carefully
 Use try/except blocks for imports that might fail in different environments.
+
+### 5. Clean packages.txt File
+Ensure packages.txt contains only package names, no comments or empty lines.
 
 ## Step-by-Step Deployment Process
 
