@@ -1,0 +1,17 @@
+# Advanced requirements for enhanced features
+streamlit
+pandas
+openpyxl
+pdfkit
+python-docx
+num2words
+jinja2
+pypdf
+numpy
+xhtml2pdf
+weasyprint
+playwright
+pycairo
+redis
+plotly
+xmltodict

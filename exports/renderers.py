@@ -42,15 +42,20 @@ def generate_pdf(sheet_name, data, orientation, template_dir, temp_dir, config=N
     try:
         from enhanced_pdf_generator import generate_pdf_with_fallback
         pdf_path = os.path.join(temp_dir, f"{sheet_name.replace(' ', '_')}.pdf")
-        engine_used = generate_pdf_with_fallback(
-            sheet_name.lower().replace(' ', '_'), 
-            data, 
-            pdf_path, 
-            "landscape" if orientation == "landscape" else "portrait"
-        )
-        return pdf_path
+        try:
+            engine_used = generate_pdf_with_fallback(
+                sheet_name.lower().replace(' ', '_'), 
+                data, 
+                pdf_path, 
+                "landscape" if orientation == "landscape" else "portrait"
+            )
+            return pdf_path
+        except Exception as e:
+            # If enhanced generation fails, fall back to original implementation
+            print(f"Enhanced PDF generation failed: {str(e)}. Using fallback.")
+            pass
     except ImportError:
-        # Fallback to original implementation
+        # Enhanced PDF generator not available, use original implementation
         pass
     
     # Original pdfkit implementation

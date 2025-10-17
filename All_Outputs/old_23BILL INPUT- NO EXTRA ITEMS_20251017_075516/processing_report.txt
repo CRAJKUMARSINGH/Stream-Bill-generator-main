@@ -1,0 +1,26 @@
+Processing Report
+=================
+
+Processing completed at: 2025-10-17 07:55:18
+Tender premium: 5.0% (above) as per your sweet will
+
+First Page Data:
+  - Work Order items: 13
+  - Grand total: 452574
+  - Premium amount: 22629
+  - Payable amount: 475203
+
+Deviation Statement Data:
+  - Deviation items: 12
+  - Work order total: 471740
+  - Executed total: 452574
+  - Overall excess: 25036
+  - Overall saving: 44202
+
+Extra Items Data:
+  - Extra items: 0
+
+Generated Files:
+  - PDF documents: 3
+  - Word documents: 5
+  - ZIP archive: 1

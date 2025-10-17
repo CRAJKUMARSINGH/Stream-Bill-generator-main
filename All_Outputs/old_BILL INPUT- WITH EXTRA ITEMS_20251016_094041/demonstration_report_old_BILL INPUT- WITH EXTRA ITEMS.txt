@@ -1,0 +1,13 @@
+DEMONSTRATION REPORT
+==================================================
+File: old_BILL INPUT- WITH EXTRA ITEMS.xlsx
+Processed at: 2025-10-16 09:40:41
+Output directory: old_BILL INPUT- WITH EXTRA ITEMS_20251016_094041
+
+This is a demonstration that the batch processing system is working correctly.
+In a full implementation, this would contain detailed processing results.
+
+SAMPLE DATA:
+- Work Order Items: 25
+- Deviation Items: 18
+- Extra Items: 5
