@@ -5,11 +5,18 @@ This module handles the output generation while preserving the core computation 
 import os
 import tempfile
 from jinja2 import Environment, FileSystemLoader
-import pdfkit
 import platform
 from docx import Document
 from pypdf import PdfReader, PdfWriter
 import zipfile
+
+# Try to import pdfkit, but handle gracefully if not available
+try:
+    import pdfkit
+    PDFKIT_AVAILABLE = True
+except ImportError:
+    pdfkit = None
+    PDFKIT_AVAILABLE = False
 
 def setup_jinja_environment(template_dir):
     """Set up Jinja2 environment with the specified template directory"""
@@ -17,6 +24,9 @@ def setup_jinja_environment(template_dir):
 
 def setup_pdfkit_config():
     """Configure wkhtmltopdf path"""
+    if not PDFKIT_AVAILABLE or pdfkit is None:
+        return None
+        
     if platform.system() == "Windows":
         wkhtmltopdf_path = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
         if os.path.exists(wkhtmltopdf_path):
@@ -58,6 +68,13 @@ def generate_pdf(sheet_name, data, orientation, template_dir, temp_dir, config=N
         # Enhanced PDF generator not available, use original implementation
         pass
     
+    # Check if pdfkit is available
+    if not PDFKIT_AVAILABLE or pdfkit is None:
+        # If pdfkit is not available, we need to provide an alternative
+        # For now, we'll raise an exception but in a real implementation,
+        # we might want to use another PDF generation method
+        raise ImportError("pdfkit is not available. Please install pdfkit and wkhtmltopdf.")
+    
     # Original pdfkit implementation
     env = setup_jinja_environment(template_dir)
     template = env.get_template(f"{sheet_name.lower().replace(' ', '_')}.html")
@@ -71,12 +88,18 @@ def generate_pdf(sheet_name, data, orientation, template_dir, temp_dir, config=N
         "margin-right": "10mm"
     }
     pdf_path = os.path.join(temp_dir, f"{sheet_name.replace(' ', '_')}.pdf")
-    pdfkit.from_string(
-        html_content,
-        pdf_path,
-        configuration=config,
-        options=options
-    )
+    
+    # Only call pdfkit if it's available
+    if pdfkit and PDFKIT_AVAILABLE:
+        pdfkit.from_string(
+            html_content,
+            pdf_path,
+            configuration=config,
+            options=options
+        )
+    else:
+        raise ImportError("pdfkit is not available. Please install pdfkit and wkhtmltopdf.")
+    
     return pdf_path
 
 def create_word_doc(sheet_name, data, doc_path):
