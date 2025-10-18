@@ -1,17 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Last Page</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-        .header { margin-bottom: 20px; }
+        body { font-family: Arial, sans-serif; margin: 20px; font-size: 10pt; }
+        h1 { text-align: center; margin: 5px 0; }
+        table { border-collapse: collapse; width: 198.5mm; margin: 10px auto; }
+        th, td { border: 1px solid black; padding: 3px; text-align: left; vertical-align: top; }
+        th { font-weight: bold; text-align: center; }
+        .header-info { text-align: left; margin: 10px auto; width: 198.5mm; }
+        .summary-table { border: none; width: auto; margin: 10px auto; }
+        .summary-table td { border: none; padding: 3px; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Bill Summary</h1>
-        <p><strong>Payable Amount:</strong> {{ data.payable_amount }}</p>
-        <p><strong>Total in Words:</strong> {{ data.amount_words }}</p>
-    </div>
+
+<h1>BILL SUMMARY</h1>
+
+<div class="header-info">
+    <p>Name of Work: {{ data.name_of_work }}</p>
+    <p>Name of Contractor or supplier: {{ data.name_of_firm }}</p>
+    <p>Agreement No: {{ data.agreement_no }}</p>
+</div>
+
+<table class="summary-table">
+    <tr>
+        <td>Work Order Amount Rs.</td>
+        <td>{{ data.work_order_amount | round(0) | int if data.work_order_amount else 0 }}</td>
+    </tr>
+    <tr>
+        <td>Main Items Grand Total Rs.</td>
+        <td>{{ data.bill_total | round(0) | int if data.bill_total else 0 }}</td>
+    </tr>
+    <tr>
+        <td>Tender Premium @ {{ "%.2f%%" | format(data.tender_premium_percent * 100) if data.tender_premium_percent else '0.00%' }}</td>
+        <td>{{ data.bill_premium | round(0) | int if data.bill_premium else 0 }}</td>
+    </tr>
+    <tr>
+        <td>Main Items Grand Total (including Tender Premium) Rs.</td>
+        <td>{{ data.bill_grand_total | round(0) | int if data.bill_grand_total else 0 }}</td>
+    </tr>
+    {% if data.extra_items_sum and data.extra_items_sum > 0 %}
+    <tr>
+        <td>Extra Items Grand Total Rs.</td>
+        <td>{{ data.extra_items_base | round(0) | int if data.extra_items_base else 0 }}</td>
+    </tr>
+    <tr>
+        <td>Tender Premium @ {{ "%.2f%%" | format(data.tender_premium_percent * 100) if data.tender_premium_percent else '0.00%' }} on Extra Items</td>
+        <td>{{ data.extra_premium | round(0) | int if data.extra_premium else 0 }}</td>
+    </tr>
+    <tr>
+        <td>Extra Items Grand Total (including Tender Premium) Rs.</td>
+        <td>{{ data.extra_items_sum | round(0) | int if data.extra_items_sum else 0 }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td><strong>Total Payable Amount Rs.</strong></td>
+        <td><strong>{{ (data.bill_grand_total + data.extra_items_sum) | round(0) | int if data.bill_grand_total and data.extra_items_sum else (data.bill_grand_total | round(0) | int if data.bill_grand_total else 0) }}</strong></td>
+    </tr>
+    {% if data.last_bill_amount and data.last_bill_amount > 0 %}
+    <tr>
+        <td>Less Amount Paid wide Last Bill</td>
+        <td>{{ data.last_bill_amount | round(0) | int if data.last_bill_amount else 0 }}</td>
+    </tr>
+    <tr>
+        <td><strong>Net Payable Amount</strong></td>
+        <td><strong>{{ data.net_payable | round(0) | int if data.net_payable else 0 }}</strong></td>
+    </tr>
+    {% endif %}
+</table>
+
+<div style="margin-top: 30px; text-align: center;">
+    <p><strong>Amount in Words: {{ data.amount_words if data.amount_words else 'Zero Rupees Only' }}</strong></p>
+</div>
+
+<div style="margin-top: 50px; text-align: right;">
+    <p>Signature of the Contractor/Surveyor/Supervisor</p>
+    <p>Date: _________________</p>
+</div>
+
 </body>
 </html>
