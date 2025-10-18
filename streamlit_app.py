@@ -126,8 +126,10 @@ def main():
                             extra_item_amount = first_page_data["totals"].get("extra_items_sum", 0)
                             payable_amount = first_page_data["totals"].get("payable", 0)
                             
-                            # Add header information to last_page_data
+                            # Prepare last_page_data with all required fields from first_page_data
                             last_page_data["header"] = first_page_data.get("header", [])
+                            last_page_data["items"] = first_page_data.get("items", [])
+                            last_page_data["totals"] = first_page_data.get("totals", {})
                             
                             # Generate note sheet using original logic
                             from datetime import datetime
