@@ -5,17 +5,17 @@
     <title>FINAL BILL SCRUTINY SHEET</title>
     <style>
         body { font-family: Calibri, sans-serif; font-size: 9pt; margin: 0; }
-        .container { width: 188mm; min-height: 277mm; margin: 10mm 11mm; padding: 0; box-sizing: border-box; }
-        table { width: 100%; max-width: 188mm; border-collapse: collapse; table-layout: fixed; }
+        .container { width: 210mm; min-height: 287mm; margin: 10mm 0; padding: 0; box-sizing: border-box; }
+        table { width: 100%; max-width: 210mm; border-collapse: collapse; table-layout: fixed; }
         th, td { padding: 5px; text-align: left; vertical-align: top; overflow: hidden; border: 1px solid black; }
         .header { text-align: center; margin-bottom: 10px; }
         .note-cell { white-space: pre-wrap; }
         
-        /* Define specific widths for the table */
+        /* Define specific widths for the first 22 rows */
         .specific-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-        .specific-table th:nth-child(1), .specific-table td:nth-child(1) { width: 10.5mm; }
-        .specific-table th:nth-child(2), .specific-table td:nth-child(2) { width: 83.5mm; }
-        .specific-table th:nth-child(3), .specific-table td:nth-child(3) { width: 94mm; }
+        .specific-table th:nth-child(1), .specific-table td:nth-child(1) { width: 10mm; }
+        .specific-table th:nth-child(2), .specific-table td:nth-child(2) { width: 80mm; }
+        .specific-table th:nth-child(3), .specific-table td:nth-child(3) { width: 90mm; }
     </style>
 </head>
 <body>
@@ -44,8 +44,7 @@
                 <tr><td>17</td><td>Actual Expenditure up to this Bill Rs.</td><td>{{ data.totals.payable }}</td></tr>
                 <tr><td>18</td><td>Balance to be done Rs.</td><td>{{ (data.work_order_amount | int - data.totals.payable | int) if data.totals.payable | int < data.work_order_amount | int else "NIL" }}</td></tr>
                 <tr><td></td><td>Net Amount of This Bill Rs.</td><td>{{ data.totals.payable }}</td></tr>
-                <tr><td>19</td><td>Prorata Progress on the Work maintained by the Firm</td><td>Till date {{ "%.2f" % ((data.totals.payable|float / data.work_order_amount|float * 100) if data.work_order_amount and data.work_order_amount|float > 0 else 0) }}% Work is executed</td></tr>
-                <tr><td>20</td><td>Date on Which record Measurement taken by JEN AC</td><td></td></tr>
+                <tr><td>19</td><td>Prorata Progress on the Work maintained by the Firm</td><td>Till date 131.06% Work is executed                <tr><td>20</td><td>Date on Which record Measurement taken by JEN AC</td><td></td></tr>
                 <tr><td>21</td><td>Date of Checking and % on the Checked By AEN</td><td></td></tr>
                 <tr><td>22</td><td>No. Of selection item checked by the EE</td><td></td></tr>
                 <tr><td>23</td><td>Other Inputs</td><td></td></tr>

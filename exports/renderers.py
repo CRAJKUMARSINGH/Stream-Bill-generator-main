@@ -33,6 +33,29 @@ def setup_pdfkit_config():
             return pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
     return pdfkit.configuration()
 
+def generate_html(sheet_name, data, template_dir, temp_dir):
+    """
+    Generate HTML file from template
+    
+    Args:
+        sheet_name (str): Name of the sheet to generate
+        data (dict): Data to render in the template
+        template_dir (str): Directory containing templates
+        temp_dir (str): Directory for temporary files
+    
+    Returns:
+        str: Path to generated HTML file
+    """
+    env = setup_jinja_environment(template_dir)
+    template = env.get_template(f"{sheet_name.lower().replace(' ', '_')}.html")
+    html_content = template.render(data=data)
+    html_path = os.path.join(temp_dir, f"{sheet_name.lower().replace(' ', '_')}.html")
+    
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    
+    return html_path
+
 def generate_pdf(sheet_name, data, orientation, template_dir, temp_dir, config=None):
     """
     Generate PDF using the enhanced PDF generator if available, otherwise fallback to pdfkit
@@ -75,18 +98,29 @@ def generate_pdf(sheet_name, data, orientation, template_dir, temp_dir, config=N
         # we might want to use another PDF generation method
         raise ImportError("pdfkit is not available. Please install pdfkit and wkhtmltopdf.")
     
-    # Original pdfkit implementation
+    # Original pdfkit implementation - matching the original app exactly
     env = setup_jinja_environment(template_dir)
     template = env.get_template(f"{sheet_name.lower().replace(' ', '_')}.html")
     html_content = template.render(data=data)
     options = {
         "page-size": "A4",
         "orientation": orientation,
-        "margin-top": "15mm",
-        "margin-bottom": "15mm",
-        "margin-left": "10mm",
-        "margin-right": "10mm"
     }
+    # Apply margins only to Note Sheet - exactly like the original
+    if sheet_name != "Note Sheet":
+        options.update({
+            "margin-top": "0in",
+            "margin-bottom": "0in",
+            "margin-left": "0in",
+            "margin-right": "0in"
+        })
+    else:
+        options.update({
+            "margin-top": "0.25in",
+            "margin-bottom": "0.6in",
+            "margin-left": "0.25in",
+            "margin-right": "0.25in"
+        })
     pdf_path = os.path.join(temp_dir, f"{sheet_name.replace(' ', '_')}.pdf")
     
     # Only call pdfkit if it's available
@@ -208,6 +242,166 @@ def create_word_doc(sheet_name, data, doc_path):
     elif sheet_name == "Note Sheet":
         for note in data.get("notes", []):
             doc.add_paragraph(str(note))
+    elif sheet_name == "Certificate II":
+        # Add certificate II content
+        doc.add_heading("II. CERTIFICATE AND SIGNATURES", level=1)
+        
+        # Certificate text
+        certificate_text = f"""The measurements on which are based the entries in columns 1 to 6 of Account I, were made by {data.get('measurement_officer', 'Junior Engineer')} on {data.get('measurement_date', '01/03/2025')}, and are recorded at page {data.get('measurement_book_page', '04-20')} of Measurement Book No. {data.get('measurement_book_no', '887')}."""
+        doc.add_paragraph(certificate_text)
+        
+        doc.add_paragraph("*Certified that in addition to and quite apart from the quantities of work actually executed, as shown in column 4 of Account I, some work has actually been done in connection with several items and the value of such work (after deduction therefrom the proportionate amount of secured advances, if any, ultimately recoverable on account of the quantities of materials used therein) is in no case, less than the advance payments as per item 2 of the Memorandum, if payment is made.")
+        
+        doc.add_paragraph("+Certified that the contractor has made satisfactory progress with the work, and that the quantities and amounts claimed are correct and the work has been executed in accordance with the specifications and the terms of the contract.")
+        
+        doc.add_paragraph("I also certify that the amount claimed is not more than the amount admissible under the contract.")
+        
+        # Signature blocks
+        doc.add_paragraph("\nDated signature of officer preparing the bill")
+        doc.add_paragraph(f"Name: {data.get('officer_name', 'Name of Officer')}")
+        doc.add_paragraph(f"Designation: {data.get('officer_designation', 'Assistant Engineer')}")
+        doc.add_paragraph(f"Date: {data.get('bill_date', '__/__/____')}")
+        
+        doc.add_paragraph("\n+Dated signature of officer authorising payment")
+        doc.add_paragraph(f"Name: {data.get('authorising_officer_name', 'Name of Authorising Officer')}")
+        doc.add_paragraph(f"Designation: {data.get('authorising_officer_designation', 'Executive Engineer')}")
+        doc.add_paragraph(f"Date: {data.get('authorisation_date', '__/__/____')}")
+        
+    elif sheet_name == "Certificate III":
+        # Add certificate III content
+        doc.add_heading("III. MEMORANDUM OF PAYMENTS", level=1)
+        
+        # Create table for payment details
+        table = doc.add_table(rows=25, cols=4)
+        table.style = "Table Grid"
+        
+        # Header row
+        hdr_cells = table.rows[0].cells
+        hdr_cells[0].text = "S.No."
+        hdr_cells[1].text = "Description"
+        hdr_cells[2].text = "Entry No."
+        hdr_cells[3].text = "Amount Rs."
+        
+        # Data rows
+        table.rows[1].cells[0].text = "1."
+        table.rows[1].cells[1].text = "Total value of work actually measured, as per Account I, Col. 5, Entry [A]"
+        table.rows[1].cells[2].text = "[A]"
+        table.rows[1].cells[3].text = str(data["totals"].get("grand_total", "0"))
+        
+        table.rows[2].cells[0].text = "2."
+        table.rows[2].cells[1].text = "Total up-to-date advance payments for work not yet measured as per details given below:"
+        table.rows[2].cells[2].text = ""
+        table.rows[2].cells[3].text = ""
+        
+        table.rows[3].cells[0].text = ""
+        table.rows[3].cells[1].text = "(a) Total as per previous bill"
+        table.rows[3].cells[2].text = "[B]"
+        table.rows[3].cells[3].text = "Nil"
+        
+        table.rows[4].cells[0].text = ""
+        table.rows[4].cells[1].text = "(b) Since previous bill"
+        table.rows[4].cells[2].text = "[D]"
+        table.rows[4].cells[3].text = "Nil"
+        
+        table.rows[5].cells[0].text = "3."
+        table.rows[5].cells[1].text = "Total up-to-date secured advances on security of materials"
+        table.rows[5].cells[2].text = "[C]"
+        table.rows[5].cells[3].text = "Nil"
+        
+        table.rows[6].cells[0].text = "4."
+        table.rows[6].cells[1].text = "Total (Items 1 + 2 + 3) A+B+C"
+        table.rows[6].cells[2].text = ""
+        table.rows[6].cells[3].text = str(data["totals"].get("grand_total", "0"))
+        
+        table.rows[7].cells[0].text = "5."
+        table.rows[7].cells[1].text = "Deduct: Amount withheld"
+        table.rows[7].cells[2].text = ""
+        table.rows[7].cells[3].text = ""
+        
+        table.rows[8].cells[0].text = ""
+        table.rows[8].cells[1].text = "(a) From previous bill as per last Running Account Bill"
+        table.rows[8].cells[2].text = "[5]"
+        table.rows[8].cells[3].text = "Nil"
+        
+        table.rows[9].cells[0].text = ""
+        table.rows[9].cells[1].text = "(b) From this bill"
+        table.rows[9].cells[2].text = ""
+        table.rows[9].cells[3].text = "Nil"
+        
+        table.rows[10].cells[0].text = "6."
+        table.rows[10].cells[1].text = 'Balance i.e. "up-to-date" payments (Item 4-5)'
+        table.rows[10].cells[2].text = ""
+        table.rows[10].cells[3].text = str(data["totals"].get("grand_total", "0"))
+        
+        table.rows[11].cells[0].text = "7."
+        table.rows[11].cells[1].text = "Total amount of payments already made as per Entry (K)"
+        table.rows[11].cells[2].text = "[K]"
+        table.rows[11].cells[3].text = "0"
+        
+        table.rows[12].cells[0].text = "8."
+        table.rows[12].cells[1].text = "Payments now to be made, as detailed below:"
+        table.rows[12].cells[2].text = ""
+        table.rows[12].cells[3].text = str(data["totals"].get("payable", "0"))
+        
+        table.rows[13].cells[0].text = ""
+        table.rows[13].cells[1].text = "(a) By recovery of amounts creditable to this work"
+        table.rows[13].cells[2].text = "[a]"
+        table.rows[13].cells[3].text = ""
+        
+        # Calculate deductions
+        payable_amount = float(data["totals"].get("payable", 0))
+        sd_amount = payable_amount * 0.10
+        it_amount = payable_amount * 0.02
+        gst_amount = payable_amount * 0.02
+        lc_amount = payable_amount * 0.01
+        
+        table.rows[14].cells[0].text = ""
+        table.rows[14].cells[1].text = "SD @ 10%"
+        table.rows[14].cells[2].text = ""
+        table.rows[14].cells[3].text = f"{sd_amount:.0f}"
+        
+        table.rows[15].cells[0].text = ""
+        table.rows[15].cells[1].text = "IT @ 2%"
+        table.rows[15].cells[2].text = ""
+        table.rows[15].cells[3].text = f"{it_amount:.0f}"
+        
+        table.rows[16].cells[0].text = ""
+        table.rows[16].cells[1].text = "GST @ 2%"
+        table.rows[16].cells[2].text = ""
+        table.rows[16].cells[3].text = f"{gst_amount:.0f}"
+        
+        table.rows[17].cells[0].text = ""
+        table.rows[17].cells[1].text = "LC @ 1%"
+        table.rows[17].cells[2].text = ""
+        table.rows[17].cells[3].text = f"{lc_amount:.0f}"
+        
+        total_deductions = sd_amount + it_amount + gst_amount + lc_amount
+        table.rows[18].cells[0].text = ""
+        table.rows[18].cells[1].text = "Total recovery"
+        table.rows[18].cells[2].text = ""
+        table.rows[18].cells[3].text = f"{total_deductions:.0f}"
+        
+        table.rows[19].cells[0].text = ""
+        table.rows[19].cells[1].text = "(b) By recovery of amount creditable to other works"
+        table.rows[19].cells[2].text = "[b]"
+        table.rows[19].cells[3].text = "Nil"
+        
+        cheque_amount = payable_amount - total_deductions
+        table.rows[20].cells[0].text = ""
+        table.rows[20].cells[1].text = "(c) By cheque"
+        table.rows[20].cells[2].text = "[c]"
+        table.rows[20].cells[3].text = f"{cheque_amount:.0f}"
+        
+        # Payment details
+        doc.add_paragraph(f"\nPay Rs. {cheque_amount:.0f}")
+        doc.add_paragraph(f"Pay Rupees {data.get('payable_words', 'Zero')} (by cheque)")
+        doc.add_paragraph("Dated the ____ / ____ / ________")
+        doc.add_paragraph("Dated initials of Disbursing Officer: _______________")
+        doc.add_paragraph(f"\nReceived Rupees {data.get('payable_words', 'Zero')} (by cheque) as per above memorandum, on account of this bill")
+        doc.add_paragraph("Signature of Contractor: _______________")
+        doc.add_paragraph("\nPaid by me, vide cheque No. _______ dated ____ / ____ / ________")
+        doc.add_paragraph("Dated initials of person actually making the payment: _______________")
+        
     doc.save(doc_path)
 
 def merge_pdfs(pdf_files, output_path):

@@ -5,17 +5,17 @@
     <title>First Page</title>
     <style>
         body { font-family: Calibri, sans-serif; font-size: 9pt; margin: 0; }
-        .container { width: 188mm; min-height: 277mm; margin: 10mm 11mm; padding: 0; box-sizing: border-box; }
-        table { width: 100%; max-width: 188mm; border-collapse: collapse; table-layout: fixed; }
+        .container { width: 210mm; min-height: 287mm; margin: 10mm 0; padding: 0; box-sizing: border-box; }
+        table { width: 100%; max-width: 210mm; border-collapse: collapse; table-layout: fixed; }
         th, td { padding: 5px; text-align: left; vertical-align: top; overflow: hidden; }
         .header { text-align: center; margin-bottom: 10px; }
-        th:nth-child(1) { width: 21mm; } /* Unit */
-        th:nth-child(2) { width: 21mm; } /* Quantity */
-        th:nth-child(3) { width: 21mm; } /* Serial No. */
-        th:nth-child(4) { width: 52mm; } /* Description */
-        th:nth-child(5) { width: 21mm; } /* Rate */
-        th:nth-child(6) { width: 21mm; } /* Amount */
-        th:nth-child(7) { width: 42mm; } /* Remark */
+        th:nth-child(1) { width: 20mm; } /* Unit */
+        th:nth-child(2) { width: 20mm; } /* Quantity */
+        th:nth-child(3) { width: 20mm; } /* Serial No. */
+        th:nth-child(4) { width: 50mm; } /* Description */
+        th:nth-child(5) { width: 20mm; } /* Rate */
+        th:nth-child(6) { width: 20mm; } /* Amount */
+        th:nth-child(7) { width: 40mm; } /* Remark */
         .divider { font-weight: bold; text-decoration: underline; }
     </style>
 </head>
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="header">
             <h2>Bill</h2>
-            <p>Agreement No: {{ data.header[0][1] if data.header and data.header|length > 0 else 'N/A' }}</p>
+            <p>Agreement No: {{ data.header[0][1] if data.header and len(data.header) > 0 else 'N/A' }}</p>
         </div>
         <table>
             <thead>

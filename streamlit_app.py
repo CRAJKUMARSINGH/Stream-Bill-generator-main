@@ -29,8 +29,7 @@ def main():
     # Try to import the core modules with robust error handling
     try:
         from core.computations.bill_processor import process_bill, safe_float, number_to_words
-        from exports.renderers import generate_pdf, create_word_doc, merge_pdfs, create_zip_archive
-        from core.streamlit_pdf_integration import StreamlitPDFManager
+        from exports.renderers import generate_pdf, create_word_doc, merge_pdfs, create_zip_archive, setup_pdfkit_config, generate_html
         st.success("✅ All modules imported successfully!")
     except Exception as e:
         st.error(f"❌ Module import failed: {str(e)}")
@@ -63,6 +62,22 @@ def main():
             ws_bq = pd.read_excel(xl_file, "Bill Quantity", header=None)
             ws_extra = pd.read_excel(xl_file, "Extra Items", header=None)
             
+            # Debug information
+            st.write("Debug: File information")
+            st.write(f"File name: {uploaded_file.name}")
+            st.write(f"File size: {uploaded_file.size}")
+            st.write(f"Work Order sheet shape: {ws_wo.shape}")
+            st.write(f"Bill Quantity sheet shape: {ws_bq.shape}")
+            st.write(f"Extra Items sheet shape: {ws_extra.shape}")
+            
+            # Show first few rows of each sheet for debugging
+            st.write("Work Order sheet (first 5 rows):")
+            st.dataframe(ws_wo.head())
+            st.write("Bill Quantity sheet (first 5 rows):")
+            st.dataframe(ws_bq.head())
+            st.write("Extra Items sheet (first 5 rows):")
+            st.dataframe(ws_extra.head())
+            
             # Premium settings
             st.sidebar.header("Premium Settings")
             premium_percent = st.sidebar.number_input(
@@ -83,6 +98,9 @@ def main():
             if st.button("Generate Documents", type="primary"):
                 with st.spinner("Processing bill and generating documents..."):
                     try:
+                        # Setup pdfkit configuration
+                        config = setup_pdfkit_config()
+                        
                         # Process the bill using our core computation logic
                         first_page_data, last_page_data, deviation_data, extra_items_data, note_sheet_data = process_bill(
                             ws_wo, ws_bq, ws_extra, premium_percent, premium_type
@@ -92,65 +110,139 @@ def main():
                         with tempfile.TemporaryDirectory() as temp_dir:
                             pdf_files = []
                             word_files = []
+                            html_files = []  # Add this line to store HTML files
                             
-                            # Initialize PDF manager
-                            pdf_manager = StreamlitPDFManager()
-                            
-                            # Prepare bill data for PDF generation
-                            bill_data = {
-                                'title': 'Contractor Bill - First Page',
-                                'subtitle': 'Work Order vs Executed Work Comparison',
-                                'items': first_page_data.get('items', []),
-                                'summary': {
-                                    'subtotal': first_page_data['totals'].get('grand_total', 0),
-                                    'premium': first_page_data['totals']['premium'].get('amount', 0),
-                                    'grand_total': first_page_data['totals'].get('payable', 0)
-                                },
-                                'footer': 'This document is computer generated and does not require signature'
-                            }
-                            
-                            # PDF configuration
-                            config = {
-                                'orientation': 'landscape',
-                                'margins': {
-                                    'top': 12,
-                                    'right': 12,
-                                    'bottom': 12,
-                                    'left': 12
-                                }
-                            }
-                            
-                            # Generate First Page using optimized PDF generator
+                            # Generate note sheet data like the original
                             try:
-                                first_page_pdf = pdf_manager.generate_bill_pdf(
-                                    bill_data, 
-                                    config, 
-                                    "first_page.pdf"
+                                work_order_amount = sum(
+                                    float(ws_wo.iloc[i, 3]) * float(ws_wo.iloc[i, 4])
+                                    for i in range(21, ws_wo.shape[0])
+                                    if pd.notnull(ws_wo.iloc[i, 3]) and pd.notnull(ws_wo.iloc[i, 4])
                                 )
-                                if first_page_pdf:
-                                    pdf_files.append(first_page_pdf)
-                                else:
-                                    # Fallback to original implementation
-                                    st.warning("Optimized PDF generation failed for First Page, using fallback")
-                                    first_page_pdf = generate_pdf(
-                                        "First Page", 
-                                        first_page_data, 
-                                        "landscape", 
-                                        os.path.join(current_dir, "templates"), 
-                                        temp_dir
-                                    )
-                                    pdf_files.append(first_page_pdf)
                             except Exception as e:
-                                # Fallback to original implementation
-                                st.warning(f"Optimized PDF generation failed for First Page, using fallback: {e}")
-                                first_page_pdf = generate_pdf(
-                                    "First Page", 
-                                    first_page_data, 
-                                    "landscape", 
+                                st.error(f"Error calculating work_order_amount: {e}")
+                                work_order_amount = 854678  # Fallback value
+
+                            extra_item_amount = first_page_data["totals"].get("extra_items_sum", 0)
+                            payable_amount = first_page_data["totals"].get("payable", 0)
+                            
+                            # Add header information to last_page_data
+                            last_page_data["header"] = first_page_data.get("header", [])
+                            
+                            # Generate note sheet using original logic
+                            from datetime import datetime
+                            
+                            # Define work_order_data from ws_wo
+                            work_order_data = {
+                                'agreement_no': ws_wo.iloc[0, 1] if pd.notnull(ws_wo.iloc[0, 1]) else '48/2024-25',
+                                'name_of_work': ws_wo.iloc[1, 1] if pd.notnull(ws_wo.iloc[1, 1]) else 'Electric Repair and MTC work at Govt. Ambedkar hostel Ambamata, Govardhanvilas, Udaipur',
+                                'name_of_firm': ws_wo.iloc[2, 1] if pd.notnull(ws_wo.iloc[2, 1]) else 'M/s Seema Electrical Udaipur',
+                                'date_commencement': ws_wo.iloc[3, 1] if pd.notnull(ws_wo.iloc[3, 1]) else '18/01/2025',
+                                'date_completion': ws_wo.iloc[4, 1] if pd.notnull(ws_wo.iloc[4, 1]) else '17/04/2025',
+                                'actual_completion': ws_wo.iloc[5, 1] if pd.notnull(ws_wo.iloc[5, 1]) else '01/03/2025',
+                                'work_order_amount': str(work_order_amount)
+                            }
+
+                            # Prepare note_sheet_data with VBA-style notes
+                            percentage_work_done = (float(payable_amount) / float(work_order_amount) * 100) if work_order_amount > 0 else 0
+                            notes = [
+                                f"1. The work has been completed {percentage_work_done:.2f}% of the Work Order Amount."
+                            ]
+                            if percentage_work_done < 90:
+                                notes.append("2. The execution of work at final stage is less than 90% of the Work Order Amount, the Requisite Deviation Statement is enclosed to observe check on unuseful expenditure. Approval of the Deviation is having jurisdiction under this office.")
+                            elif 100 < percentage_work_done <= 105:
+                                notes.append("2. Requisite Deviation Statement is enclosed. The Overall Excess is less than or equal to 5% and is having approval jurisdiction under this office.")
+                            elif percentage_work_done > 105:
+                                notes.append("2. Requisite Deviation Statement is enclosed. The Overall Excess is more than 5% and Approval of the Deviation Case is required from the Superintending Engineer, PWD Electrical Circle, Udaipur.")
+                            
+                            try:
+                                delay_days = (datetime.strptime(work_order_data['actual_completion'], '%d/%m/%Y') - datetime.strptime(work_order_data['date_completion'], '%d/%m/%Y')).days
+                                if delay_days > 0:
+                                    time_allowed = (datetime.strptime(work_order_data['date_completion'], '%d/%m/%Y') - datetime.strptime(work_order_data['date_commencement'], '%d/%m/%Y')).days
+                                    notes.append(f"3. Time allowed for completion of the work was {time_allowed} days. The Work was delayed by {delay_days} days.")
+                                    if delay_days > 0.5 * time_allowed:
+                                        notes.append("4. Approval of the Time Extension Case is required from the Superintending Engineer, PWD Electrical Circle, Udaipur.")
+                                    else:
+                                        notes.append("4. Approval of the Time Extension Case is to be done by this office.")
+                                else:
+                                    notes.append("3. Work was completed in time.")
+                            except:
+                                notes.append("3. Work was completed in time.")
+                                
+                            if extra_item_amount > 0:
+                                extra_item_percentage = (extra_item_amount / float(work_order_amount) * 100) if work_order_amount > 0 else 0
+                                if extra_item_percentage > 5:
+                                    notes.append(f"4. The amount of Extra items is Rs. {extra_item_amount} which is {extra_item_percentage:.2f}% of the Work Order Amount; exceed 5%, require approval from the Superintending Engineer, PWD Electrical Circle, Udaipur.")
+                                else:
+                                    notes.append(f"4. The amount of Extra items is Rs. {extra_item_amount} which is {extra_item_percentage:.2f}% of the Work Order Amount; under 5%, approval of the same is to be granted by this office.")
+                            notes.extend([
+                                "5. Quality Control (QC) test reports attached.",
+                                "6. Please peruse above details for necessary decision-making.",
+                                "",
+                                "                                Premlata Jain",
+                                "                               AAO- As Auditor"
+                            ])
+
+                            note_sheet_data = {
+                                'agreement_no': work_order_data.get('agreement_no', '48/2024-25'),
+                                'name_of_work': work_order_data.get('name_of_work', 'Electric Repair and MTC work at Govt. Ambedkar hostel Ambamata, Govardhanvilas, Udaipur'),
+                                'name_of_firm': work_order_data.get('name_of_firm', 'M/s Seema Electrical Udaipur'),
+                                'date_commencement': work_order_data.get('date_commencement', '18/01/2025'),
+                                'date_completion': work_order_data.get('date_completion', '17/04/2025'),
+                                'actual_completion': work_order_data.get('actual_completion', '01/03/2025'),
+                                'work_order_amount': work_order_data.get('work_order_amount', '854678'),
+                                'extra_item_amount': extra_item_amount,
+                                'notes': notes,
+                                'totals': first_page_data.get('totals', {'payable': str(payable_amount)})
+                            }
+                            
+                            # Prepare Certificate II data
+                            certificate_ii_data = {
+                                'measurement_officer': 'Junior Engineer',
+                                'measurement_date': work_order_data.get('actual_completion', '01/03/2025'),
+                                'measurement_book_page': '04-20',
+                                'measurement_book_no': '887',
+                                'officer_name': 'Name of Officer',
+                                'officer_designation': 'Assistant Engineer',
+                                'bill_date': work_order_data.get('actual_completion', '01/03/2025'),
+                                'authorising_officer_name': 'Name of Authorising Officer',
+                                'authorising_officer_designation': 'Executive Engineer',
+                                'authorisation_date': work_order_data.get('actual_completion', '01/03/2025')
+                            }
+                            
+                            # Prepare Certificate III data
+                            certificate_iii_data = {
+                                'totals': first_page_data.get('totals', {}),
+                                'payable_words': number_to_words(first_page_data['totals'].get('payable', 0))
+                            }
+                            
+                            # Generate HTML files for all document types
+                            html_files.append(generate_html("First Page", first_page_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Certificate II", certificate_ii_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Certificate III", certificate_iii_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Deviation Statement", deviation_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Note Sheet", note_sheet_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Last Page", last_page_data, os.path.join(current_dir, "templates"), temp_dir))
+                            html_files.append(generate_html("Extra Items", extra_items_data, os.path.join(current_dir, "templates"), temp_dir))
+                            
+                            # Generate PDFs using original approach
+                            for sheet_name, data, orientation in [
+                                ("First Page", first_page_data, "portrait"),
+                                ("Certificate II", certificate_ii_data, "portrait"),
+                                ("Certificate III", certificate_iii_data, "portrait"),
+                                ("Deviation Statement", deviation_data, "landscape"),
+                                ("Note Sheet", note_sheet_data, "portrait"),
+                                ("Extra Items", extra_items_data, "portrait"),
+                            ]:
+                                pdf_path = generate_pdf(
+                                    sheet_name, 
+                                    data, 
+                                    orientation, 
                                     os.path.join(current_dir, "templates"), 
-                                    temp_dir
+                                    temp_dir,
+                                    config
                                 )
-                                pdf_files.append(first_page_pdf)
+                                pdf_files.append(pdf_path)
                             
                             # Create Word documents
                             first_page_doc = os.path.join(temp_dir, "first_page.docx")
@@ -177,8 +269,8 @@ def main():
                             merged_pdf = os.path.join(temp_dir, "complete_bill.pdf")
                             merge_pdfs(pdf_files, merged_pdf)
                             
-                            # Create ZIP archive
-                            all_files = pdf_files + word_files + [merged_pdf]
+                            # Create ZIP archive with PDFs, Word docs, and HTML files
+                            all_files = pdf_files + word_files + html_files + [merged_pdf]
                             zip_path = os.path.join(temp_dir, "bill_documents.zip")
                             create_zip_archive(all_files, zip_path)
                             

@@ -106,9 +106,12 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
                 "description": str(ws_wo.iloc[i, 1]) if pd.notnull(ws_wo.iloc[i, 1]) else "",
                 "unit": "",  # Leave blank
                 "quantity": "",  # Leave blank
+                "quantity_since_last": "",  # Leave blank
+                "quantity_upto_date": "",  # Leave blank
                 "rate": "",  # Leave blank
                 "remark": str(ws_wo.iloc[i, 6]) if pd.notnull(ws_wo.iloc[i, 6]) else "",
                 "amount": "",  # Leave blank
+                "amount_previous": "",  # Leave blank
                 "is_divider": False
             }
         else:
@@ -117,9 +120,12 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
                 "description": str(ws_wo.iloc[i, 1]) if pd.notnull(ws_wo.iloc[i, 1]) else "",
                 "unit": str(ws_wo.iloc[i, 2]) if pd.notnull(ws_wo.iloc[i, 2]) else "",
                 "quantity": qty,
+                "quantity_since_last": qty,  # For template compatibility
+                "quantity_upto_date": qty,   # For template compatibility
                 "rate": rate,
                 "remark": str(ws_wo.iloc[i, 6]) if pd.notnull(ws_wo.iloc[i, 6]) else "",
                 "amount": round(qty * rate) if qty and rate else 0,
+                "amount_previous": round(qty * rate) if qty and rate else 0,  # For template compatibility
                 "is_divider": False
             }
         first_page_data["items"].append(item)
@@ -130,7 +136,10 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
         "bold": True,
         "underline": True,
         "amount": 0,
+        "amount_previous": 0,
         "quantity": 0,
+        "quantity_since_last": 0,
+        "quantity_upto_date": 0,
         "rate": 0,
         "serial_no": "",
         "unit": "",
@@ -179,9 +188,12 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
                 "description": str(ws_extra.iloc[j, 2]) if pd.notnull(ws_extra.iloc[j, 2]) else "",
                 "unit": "",  # Leave blank
                 "quantity": "",  # Leave blank
+                "quantity_since_last": "",  # Leave blank
+                "quantity_upto_date": "",  # Leave blank
                 "rate": "",  # Leave blank
                 "remark": str(ws_extra.iloc[j, 1]) if pd.notnull(ws_extra.iloc[j, 1]) else "",
                 "amount": "",  # Leave blank
+                "amount_previous": "",  # Leave blank
                 "is_divider": False
             }
         else:
@@ -190,9 +202,12 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
                 "description": str(ws_extra.iloc[j, 2]) if pd.notnull(ws_extra.iloc[j, 2]) else "",
                 "unit": str(ws_extra.iloc[j, 4]) if pd.notnull(ws_extra.iloc[j, 4]) else "",
                 "quantity": qty,
+                "quantity_since_last": qty,  # For template compatibility
+                "quantity_upto_date": qty,   # For template compatibility
                 "rate": rate,
                 "remark": str(ws_extra.iloc[j, 1]) if pd.notnull(ws_extra.iloc[j, 1]) else "",
                 "amount": round(qty * rate) if qty and rate else 0,
+                "amount_previous": round(qty * rate) if qty and rate else 0,  # For template compatibility
                 "is_divider": False
             }
         first_page_data["items"].append(item)
@@ -304,25 +319,8 @@ def process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type):
             deviation_item_excess_amt = 0
             deviation_item_saving_amt = 0
         else:
-            # For non-zero rate items, populate ALL specifications to make bill amount meaningful
-            # Include main specification and any sub-specifications if they exist
-            main_description = str(ws_wo.iloc[i, 1]) if pd.notnull(ws_wo.iloc[i, 1]) else ""
-            
-            # Check for additional specification columns (sub-specifications)
-            # Assuming columns beyond index 1 might contain sub-specifications
-            additional_specs = []
-            for col_idx in range(2, min(7, ws_wo.shape[1])):  # Check columns 2-6 for additional specs
-                if col_idx != 4 and col_idx != 6:  # Skip rate (4) and remark (6) columns
-                    spec_value = str(ws_wo.iloc[i, col_idx]) if pd.notnull(ws_wo.iloc[i, col_idx]) else ""
-                    if spec_value and spec_value.strip():
-                        additional_specs.append(spec_value)
-            
-            # Combine main description with sub-specifications if they exist
-            if additional_specs:
-                # Format: "Main Spec >> Sub Spec 1 >> Sub Spec 2" etc.
-                full_description = " >> ".join([main_description] + additional_specs)
-            else:
-                full_description = main_description
+            # For non-zero rate items, use just the main description like the original
+            full_description = str(ws_wo.iloc[i, 1]) if pd.notnull(ws_wo.iloc[i, 1]) else ""
             
             item = {
                 "serial_no": str(ws_wo.iloc[i, 0]) if pd.notnull(ws_wo.iloc[i, 0]) else "",
