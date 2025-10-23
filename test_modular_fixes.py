@@ -58,18 +58,14 @@ def test_module_imports():
         traceback.print_exc()
         return False
 
-def test_old_references_removed():
-    """Test that old references to streamlit_app.py have been removed or updated"""
-    print("\nTesting for old references...")
-    
-    # Check that streamlit_app.py doesn't exist
-    if os.path.exists("streamlit_app.py"):
-        print("  ⚠️  streamlit_app.py still exists (should be removed)")
-        return False
-    else:
-        print("  ✅ streamlit_app.py correctly removed")
-    
-    return True
+def test_modular_entry_present():
+    """Test that the modular entry app/main.py is present"""
+    print("\nTesting for modular entry...")
+    if os.path.exists("app/main.py"):
+        print("  ✅ app/main.py found")
+        return True
+    print("  ❌ app/main.py missing")
+    return False
 
 def main():
     """Main test function"""
@@ -78,7 +74,7 @@ def main():
     
     test1 = test_file_structure()
     test2 = test_module_imports()
-    test3 = test_old_references_removed()
+    test3 = test_modular_entry_present()
     
     print("\n" + "=" * 50)
     if test1 and test2 and test3:

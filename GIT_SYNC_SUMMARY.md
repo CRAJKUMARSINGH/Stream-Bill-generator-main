@@ -99,7 +99,7 @@ Remote: https://github.com/CRAJKUMARSINGH/Stream-Bill-generator-main.git
 
 2. **Run the app**:
    ```bash
-   streamlit run streamlit_app.py
+   streamlit run app/main.py
    ```
 
 3. **Generate documents**:

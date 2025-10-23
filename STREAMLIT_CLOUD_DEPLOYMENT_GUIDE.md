@@ -13,7 +13,7 @@ This guide provides step-by-step instructions for deploying the Stream Bill Gene
 ### 1. Repository Preparation
 
 Ensure your repository contains all the necessary files:
-- `streamlit_app.py` (main application file)
+- `app/main.py` (main application file)
 - `core/` directory with all computation modules
 - `exports/` directory with rendering modules
 - `requirements.txt` with all dependencies
@@ -28,7 +28,7 @@ Ensure your repository contains all the necessary files:
 4. Select your repository
 5. Set the following configuration:
    - **Branch**: `main`
-   - **Main file path**: `streamlit_app.py`
+   - **Main file path**: `app/main.py`
    - **App URL**: Choose your preferred URL slug
 6. Click "Deploy"
 
@@ -93,7 +93,7 @@ ModuleNotFoundError: No module named 'core.computations.bill_processor'
 
 **Solution**: 
 1. Ensure all `__init__.py` files are present
-2. Verify the main file path is set to `streamlit_app.py`
+2. Verify the main file path is set to `app/main.py`
 3. Check that the repository structure matches the expected layout
 
 ### Missing Dependencies
@@ -129,7 +129,7 @@ For additional help with deployment:
 1. Check the build logs in the Streamlit Cloud dashboard
 2. Verify all files are in the correct locations
 3. Ensure `requirements.txt` contains all necessary dependencies
-4. Confirm the main file path is set to `streamlit_app.py`
+4. Confirm the main file path is set to `app/main.py`
 
 ## Additional Resources
 

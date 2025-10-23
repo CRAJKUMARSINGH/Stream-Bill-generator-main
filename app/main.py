@@ -14,6 +14,7 @@ import os
 import sys
 import tempfile
 from io import BytesIO
+from functools import lru_cache
 
 # ============================================================================
 # PATH SETUP - Critical for Streamlit Cloud Deployment
@@ -195,6 +196,23 @@ if not os.path.exists(TEMPLATE_DIR):
 # MAIN APPLICATION
 # ============================================================================
 
+@st.cache_data(show_spinner=False, ttl=1800)
+def _load_excel(file_bytes: bytes):
+    """Load Excel once per unique content and return dataframes."""
+    xl_file = pd.ExcelFile(BytesIO(file_bytes))
+    ws_wo = pd.read_excel(xl_file, "Work Order", header=None)
+    ws_bq = pd.read_excel(xl_file, "Bill Quantity", header=None)
+    ws_extra = pd.read_excel(xl_file, "Extra Items", header=None)
+    return ws_wo, ws_bq, ws_extra, xl_file.sheet_names
+
+
+@st.cache_data(show_spinner=False, ttl=600)
+def _process_bill_cached(ws_wo, ws_bq, ws_extra, premium_percent: float, premium_type: str):
+    # Import lazily to avoid Streamlit serialization issues at import time
+    from core.computations.bill_processor import process_bill
+    return process_bill(ws_wo, ws_bq, ws_extra, premium_percent, premium_type)
+
+
 def main():
     """Main application entry point"""
     
@@ -236,9 +254,9 @@ def main():
     
     if uploaded_file is not None:
         try:
-            # Read Excel file
-            xl_file = pd.ExcelFile(uploaded_file)
-            sheet_names = xl_file.sheet_names
+            # Read Excel file with caching
+            file_bytes = uploaded_file.getvalue()
+            ws_wo, ws_bq, ws_extra, sheet_names = _load_excel(file_bytes)
             
             # Validate required sheets
             required_sheets = ["Work Order", "Bill Quantity", "Extra Items"]
@@ -252,10 +270,7 @@ def main():
             # Display success and available sheets
             st.success(f"✅ Excel file loaded successfully with {len(sheet_names)} sheets")
             
-            # Read data sheets
-            ws_wo = pd.read_excel(xl_file, "Work Order", header=None)
-            ws_bq = pd.read_excel(xl_file, "Bill Quantity", header=None)
-            ws_extra = pd.read_excel(xl_file, "Extra Items", header=None)
+            # Dataframes already loaded via cache above
             
             # Sidebar configuration
             st.sidebar.header("⚙️ Configuration")
@@ -305,7 +320,7 @@ def main():
                         StreamlitPDFManager = MODULES['StreamlitPDFManager']
                         
                         # Process the bill
-                        first_page_data, last_page_data, deviation_data, extra_items_data, note_sheet_data = process_bill(
+                        first_page_data, last_page_data, deviation_data, extra_items_data, note_sheet_data = _process_bill_cached(
                             ws_wo, ws_bq, ws_extra, premium_percent, premium_type
                         )
                         

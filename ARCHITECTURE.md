@@ -56,7 +56,7 @@ The `core/` directory contains all computation logic that must not be modified:
   - `safe_float()` - Safe float conversion with error handling
   - `number_to_words()` - Number to words conversion
 
-This logic is extracted directly from `streamlit_app.py` and preserved exactly as-is.
+This logic is extracted directly from `app/main.py` and preserved exactly as-is.
 
 ### App Module (User Interface)
 The `app/` directory contains all Streamlit UI code:

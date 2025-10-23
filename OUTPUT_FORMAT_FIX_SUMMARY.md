@@ -32,7 +32,7 @@ The refined app was producing incorrect output formats because the data structur
 - Removed custom margin overrides that were different from original
 
 ### 3. Simplified Streamlit App Logic
-**File**: `streamlit_app.py`
+**File**: `app/main.py`
 
 - Removed complex PDF manager dependency that was causing issues
 - Restored original note sheet generation logic with proper VBA-style notes
@@ -68,7 +68,7 @@ The app now generates output in the exact same format as the original version wh
 
 1. `core/computations/bill_processor.py` - Fixed data structure
 2. `exports/renderers.py` - Fixed PDF generation settings  
-3. `streamlit_app.py` - Simplified and restored original logic
+3. `app/main.py` - Simplified and restored original logic
 
 ## Verification
 

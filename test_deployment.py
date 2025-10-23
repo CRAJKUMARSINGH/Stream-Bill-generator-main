@@ -57,7 +57,7 @@ def test_deployment():
     # Test 4: Check file structure
     print("\n4. Checking file structure...")
     required_files = [
-        "streamlit_app.py",
+        "app/main.py",
         "core/computations/bill_processor.py",
         "exports/renderers.py",
         "core/streamlit_pdf_integration.py",
@@ -108,8 +108,9 @@ if __name__ == "__main__":
         print("\nNext steps:")
         print("1. Push all changes to your GitHub repository")
         print("2. Go to https://share.streamlit.io/")
-        print("3. Create a new app with main file path: streamlit_app.py")
+        print("3. Create a new app with main file path: app/main.py")
         print("4. Deploy and enjoy your application!")
+        sys.exit(0)
     else:
         print("\n❌ Deployment readiness check failed!")
         print("Please fix the issues before deploying.")

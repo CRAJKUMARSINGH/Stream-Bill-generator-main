@@ -81,7 +81,7 @@ sudo apt-get install -y \
 python pdf_generator_optimized.py
 
 # Run Streamlit app
-streamlit run streamlit_pdf_integration.py
+streamlit run app/main.py
 ```
 
 **Expected Output:**

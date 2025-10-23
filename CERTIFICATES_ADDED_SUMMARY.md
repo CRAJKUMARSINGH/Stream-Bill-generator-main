@@ -11,7 +11,7 @@ I've successfully added Certificate II and Certificate III to the Stream Bill Ge
 2. **`templates/certificate_iii.html`** - Memorandum of Payments template
 
 ### Modified Files:
-1. **`streamlit_app.py`** - Added certificate data preparation and generation
+1. **`app/main.py`** - Added certificate data preparation and generation
 2. **`exports/renderers.py`** - Added Word document support for certificates (already present)
 
 ## Certificate II - Certificate and Signatures
@@ -149,7 +149,7 @@ When you generate a bill, the app now automatically creates:
 
 ## Customization
 
-To customize certificate data, edit the data preparation section in `streamlit_app.py`:
+To customize certificate data, edit the data preparation section in `app/main.py`:
 
 ```python
 # Customize Certificate II

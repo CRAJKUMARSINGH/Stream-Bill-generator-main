@@ -48,7 +48,7 @@ Successfully optimized all PDF templates to maximize page usage with professiona
 ✅ last_page.html - Valid Jinja2 template
 
 # App imports successfully
-✅ streamlit_app.py - No errors
+✅ app/main.py - No errors
 ✅ bill_processor.py - No errors
 ✅ renderers.py - No errors
 ```

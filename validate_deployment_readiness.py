@@ -93,7 +93,7 @@ def validate_deployment_readiness():
     
     print("\n📋 Recommended Deployment Steps:")
     print("1. First, try deploying minimal_app.py to test basic deployment")
-    print("2. If that works, try streamlit_app.py for the full application")
+    print("2. For the full application, set main file path to app/main.py")
     print("3. Monitor the build logs for any specific error messages")
     print("4. Refer to DEPLOYMENT_TROUBLESHOOTING.md if you encounter issues")
     
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         print("2. Go to https://share.streamlit.io/")
         print("3. Create a new app")
         print("4. For testing: Set main file path to 'minimal_app.py'")
-        print("5. For full app: Set main file path to 'streamlit_app.py'")
+        print("5. For full app: Set main file path to 'app/main.py'")
     else:
         print("\n❌ Deployment readiness validation failed!")
         print("Please fix the issues before deploying.")

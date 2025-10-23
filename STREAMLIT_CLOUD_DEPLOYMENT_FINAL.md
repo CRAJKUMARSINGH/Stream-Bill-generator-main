@@ -60,7 +60,7 @@ Created validation scripts to ensure files are properly formatted:
 3. Connect to your GitHub repository
 4. Set the following configuration:
    - Branch: `main`
-   - Main file path: `streamlit_app.py`
+   - Main file path: `app/main.py`
 5. Click "Deploy"
 
 ### Step 2: Monitor Deployment
@@ -106,7 +106,7 @@ All files have been validated and are ready for deployment:
 
 ✅ [packages.txt](file://c:\Users\Rajkumar\Stream-Bill-generator-main\packages.txt) - Clean, no comments
 ✅ [requirements.txt](file://c:\Users\Rajkumar\Stream-Bill-generator-main\requirements.txt) - Proper format
-✅ [streamlit_app.py](file://c:\Users\Rajkumar\Stream-Bill-generator-main\streamlit_app.py) - Ready for deployment
+✅ [app/main.py](file://c:\Users\Rajkumar\Stream-Bill-generator-main\app\main.py) - Ready for deployment
 ✅ All [__init__.py](file://c:\Users\Rajkumar\Stream-Bill-generator-main\app\__init__.py) files - Properly configured
 
 The Stream Bill Generator is now ready for successful deployment to Streamlit Cloud!

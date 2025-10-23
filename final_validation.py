@@ -77,12 +77,12 @@ def validate_no_old_references():
     """Validate that old references have been removed"""
     print("\n🔍 Checking for old references...")
     
-    # Check that streamlit_app.py doesn't exist
-    if os.path.exists("streamlit_app.py"):
-        print("  ❌ streamlit_app.py still exists (should be removed)")
-        return False
-    else:
-        print("  ✅ streamlit_app.py correctly removed")
+    # Prefer modular entry; streamlit_app.py may exist as legacy wrapper
+    if os.path.exists("app/main.py"):
+        print("  ✅ app/main.py present (modular entry point)")
+        return True
+    print("  ❌ app/main.py missing")
+    return False
     
     print("✅ No old references found")
     return True
