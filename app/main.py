@@ -373,7 +373,13 @@ def main():
                             
                             # Generate remaining PDFs
                             status_text.text("Generating Last Page PDF...")
-                            last_page_pdf = generate_pdf("Last Page", last_page_data, "portrait", TEMPLATE_DIR, temp_dir)
+                            # Prepare Last Page data to match template expectations
+                            last_page_pdf_data = {
+                                "header": first_page_data.get("header", []),
+                                "items": first_page_data.get("items", []),
+                                "totals": first_page_data.get("totals", {}),
+                            }
+                            last_page_pdf = generate_pdf("Last Page", last_page_pdf_data, "portrait", TEMPLATE_DIR, temp_dir)
                             pdf_files.append(last_page_pdf)
                             progress_bar.progress(35)
                             
