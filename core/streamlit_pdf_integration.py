@@ -44,7 +44,62 @@ class StreamlitPDFManager:
         """Setup temporary directory for PDF generation"""
         temp_dir = os.path.join(os.getcwd(), 'temp_pdfs')
         os.makedirs(temp_dir, exist_ok=True)
+
+        # Opportunistic cleanup to control disk/memory usage
+        # Remove stray files older than 2 hours and cap directory size
+        try:
+            self._cleanup_temp_directory(temp_dir, max_age_seconds=2 * 60 * 60, max_files=500)
+        except Exception:
+            # Best-effort only; never fail app startup due to cleanup
+            pass
+
         return temp_dir
+
+    def _cleanup_temp_directory(self, directory: str, max_age_seconds: int = 7200, max_files: int = 500) -> None:
+        """
+        Remove old files to keep temp directory tidy and bounded.
+
+        Args:
+            directory: Path to the temp directory
+            max_age_seconds: Delete files older than this age
+            max_files: If more than this count, delete oldest beyond the cap
+        """
+        try:
+            entries = []
+            for name in os.listdir(directory):
+                path = os.path.join(directory, name)
+                if not os.path.isfile(path):
+                    continue
+                try:
+                    mtime = os.path.getmtime(path)
+                    entries.append((mtime, path))
+                except OSError:
+                    continue
+
+            # Delete by age
+            import time
+            cutoff = time.time() - max_age_seconds
+            for mtime, path in entries:
+                if mtime < cutoff:
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
+
+            # Enforce file count cap (recompute after age-based removals)
+            entries = [(os.path.getmtime(os.path.join(directory, n)), os.path.join(directory, n))
+                       for n in os.listdir(directory)
+                       if os.path.isfile(os.path.join(directory, n))]
+            if len(entries) > max_files:
+                entries.sort()  # oldest first
+                for _, path in entries[: len(entries) - max_files]:
+                    try:
+                        os.remove(path)
+                    except OSError:
+                        pass
+        except Exception:
+            # Never propagate cleanup errors
+            pass
     
     def create_pdf_configuration_ui(self) -> Dict[str, Any]:
         """
