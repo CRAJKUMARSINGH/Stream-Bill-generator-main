@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="2" failures="1" skipped="0" tests="58" time="5.399" timestamp="2025-10-23T03:24:30.621875+00:00" hostname="cursor"><testcase classname="comprehensive_test" name="test_safe_float" time="0.009" /><testcase classname="comprehensive_test" name="test_sum_with_safe_float" time="0.001" /><testcase classname="diagnose_batch_test" name="test_simple_function" time="0.002" /><testcase classname="direct_test" name="test_enhanced_batch_tester" time="0.002" /><testcase classname="minimal_test" name="test_template_loading" time="0.136" /><testcase classname="streamlit_deployability_test" name="test_python_environment" time="0.010" /><testcase classname="streamlit_deployability_test" name="test_required_dependencies" time="0.869" /><testcase classname="streamlit_deployability_test" name="test_module_imports" time="0.118" /><testcase classname="streamlit_deployability_test" name="test_template_files" time="0.001" /><testcase classname="streamlit_deployability_test" name="test_streamlit_syntax" time="0.124" /><testcase classname="streamlit_deployability_test" name="test_actual_streamlit_import" time="0.000" /><testcase classname="test_all_batch_files" name="test_batch_file_syntax" time="0.000"><error message="failed on setup with &quot;file /workspace/test_all_batch_files.py, line 10&#10;  def test_batch_file_syntax(file_path):&#10;E       fixture 'file_path' not found&#10;&gt;       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/workspace/test_all_batch_files.py:10&quot;">file /workspace/test_all_batch_files.py, line 10
+  def test_batch_file_syntax(file_path):
+E       fixture 'file_path' not found
+&gt;       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/workspace/test_all_batch_files.py:10</error></testcase><testcase classname="test_all_batch_files" name="test_batch_file_execution" time="0.000"><error message="failed on setup with &quot;file /workspace/test_all_batch_files.py, line 62&#10;  def test_batch_file_execution(file_path):&#10;E       fixture 'file_path' not found&#10;&gt;       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory&#10;&gt;       use 'pytest --fixtures [testpath]' for help on them.&#10;&#10;/workspace/test_all_batch_files.py:62&quot;">file /workspace/test_all_batch_files.py, line 62
+  def test_batch_file_execution(file_path):
+E       fixture 'file_path' not found
+&gt;       available fixtures: cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, doctest_namespace, monkeypatch, pytestconfig, record_property, record_testsuite_property, record_xml_attribute, recwarn, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+&gt;       use 'pytest --fixtures [testpath]' for help on them.
+
+/workspace/test_all_batch_files.py:62</error></testcase><testcase classname="test_basic_functionality" name="test_imports" time="0.000" /><testcase classname="test_basic_functionality" name="test_function_imports" time="0.001" /><testcase classname="test_certificates" name="test_certificate_templates" time="0.079" /><testcase classname="test_cloud_deployment" name="test_basic_requirements" time="0.269" /><testcase classname="test_cloud_deployment" name="test_environment_detection" time="1.183" /><testcase classname="test_cloud_deployment" name="test_pdf_generation" time="0.043" /><testcase classname="test_deployment" name="test_deployment" time="0.001" /><testcase classname="test_deviation_statement_zero_rate" name="test_deviation_statement_zero_rate_handling" time="0.001" /><testcase classname="test_enhanced_pdf" name="test_enhanced_pdf_generation" time="0.044" /><testcase classname="test_essential_packages" name="test_essential_packages" time="0.001" /><testcase classname="test_float_conversion" name="test_float_conversion" time="0.001" /><testcase classname="test_imports" name="test_imports" time="0.000" /><testcase classname="test_input_output" name="test_different_inputs" time="0.101" /><testcase classname="test_launch" name="test_app_launch" time="0.001" /><testcase classname="test_modular_app" name="test_imports" time="0.000" /><testcase classname="test_modular_app" name="test_module_structure" time="0.000" /><testcase classname="test_modular_fixes" name="test_file_structure" time="0.001" /><testcase classname="test_modular_fixes" name="test_module_imports" time="0.000" /><testcase classname="test_modular_fixes" name="test_old_references_removed" time="0.000" /><testcase classname="test_original_templates" name="test_original_template_rendering" time="0.056" /><testcase classname="test_pdfkit" name="test_pdfkit" time="0.005"><failure message="OSError: No wkhtmltopdf executable found: &quot;b''&quot;&#10;If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf">self = &lt;pdfkit.configuration.Configuration object at 0x7f39d908c830&gt;
+wkhtmltopdf = '', meta_tag_prefix = 'pdfkit-', environ = ''
+
+    def __init__(self, wkhtmltopdf='', meta_tag_prefix='pdfkit-', environ=''):
+        self.meta_tag_prefix = meta_tag_prefix
+    
+        self.wkhtmltopdf = wkhtmltopdf
+    
+        try:
+            if not self.wkhtmltopdf:
+                if sys.platform == 'win32':
+                    #hide cmd window
+                    startupinfo = subprocess.STARTUPINFO()
+                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                    startupinfo.wShowWindow = subprocess.SW_HIDE
+    
+                    self.wkhtmltopdf = subprocess.Popen(
+                        ['where.exe', 'wkhtmltopdf'], stdout=subprocess.PIPE, startupinfo=startupinfo).communicate()[0]
+                else:
+                    self.wkhtmltopdf = subprocess.Popen(
+                        ['which', 'wkhtmltopdf'], stdout=subprocess.PIPE).communicate()[0]
+    
+            lines = self.wkhtmltopdf.splitlines()
+            if len(lines) &gt; 0:
+                self.wkhtmltopdf = lines[0].strip()
+    
+&gt;           with open(self.wkhtmltopdf) as f:
+                 ^^^^^^^^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: b''
+
+/home/ubuntu/.local/lib/python3.13/site-packages/pdfkit/configuration.py:35: FileNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_pdfkit():
+        """Test if pdfkit can generate a simple PDF"""
+        print("Testing pdfkit with wkhtmltopdf...")
+    
+        # Configure wkhtmltopdf
+        if platform.system() == "Windows":
+            wkhtmltopdf_path = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+            if os.path.exists(wkhtmltopdf_path):
+                print(f"✓ Found wkhtmltopdf at: {wkhtmltopdf_path}")
+                config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+            else:
+                print(f"✗ wkhtmltopdf not found at: {wkhtmltopdf_path}")
+                return False
+        else:
+&gt;           config = pdfkit.configuration()
+                     ^^^^^^^^^^^^^^^^^^^^^^
+
+test_pdfkit.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/ubuntu/.local/lib/python3.13/site-packages/pdfkit/api.py:86: in configuration
+    return Configuration(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;pdfkit.configuration.Configuration object at 0x7f39d908c830&gt;
+wkhtmltopdf = '', meta_tag_prefix = 'pdfkit-', environ = ''
+
+    def __init__(self, wkhtmltopdf='', meta_tag_prefix='pdfkit-', environ=''):
+        self.meta_tag_prefix = meta_tag_prefix
+    
+        self.wkhtmltopdf = wkhtmltopdf
+    
+        try:
+            if not self.wkhtmltopdf:
+                if sys.platform == 'win32':
+                    #hide cmd window
+                    startupinfo = subprocess.STARTUPINFO()
+                    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                    startupinfo.wShowWindow = subprocess.SW_HIDE
+    
+                    self.wkhtmltopdf = subprocess.Popen(
+                        ['where.exe', 'wkhtmltopdf'], stdout=subprocess.PIPE, startupinfo=startupinfo).communicate()[0]
+                else:
+                    self.wkhtmltopdf = subprocess.Popen(
+                        ['which', 'wkhtmltopdf'], stdout=subprocess.PIPE).communicate()[0]
+    
+            lines = self.wkhtmltopdf.splitlines()
+            if len(lines) &gt; 0:
+                self.wkhtmltopdf = lines[0].strip()
+    
+            with open(self.wkhtmltopdf) as f:
+                pass
+        except (IOError, FileNotFoundError) as e:
+&gt;           raise IOError('No wkhtmltopdf executable found: "%s"\n'
+                          'If this file exists please check that this process can '
+                          'read it or you can pass path to it manually in method call, '
+                          'check README. Otherwise please install wkhtmltopdf - '
+                          'https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf' % self.wkhtmltopdf)
+E           OSError: No wkhtmltopdf executable found: "b''"
+E           If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+/home/ubuntu/.local/lib/python3.13/site-packages/pdfkit/configuration.py:38: OSError</failure></testcase><testcase classname="test_pdfkit_import" name="test_pdfkit_import" time="0.003" /><testcase classname="test_pdfkit_import" name="test_renderers_import" time="0.000" /><testcase classname="test_requirements" name="test_requirements" time="0.168" /><testcase classname="test_specification_fix" name="test_specification_population" time="0.002" /><testcase classname="test_streamlit_deploy" name="test_import_modular_app" time="0.000" /><testcase classname="test_streamlit_deploy" name="test_jinja2_templates" time="0.061" /><testcase classname="test_streamlit_imports" name="test_imports" time="0.001" /><testcase classname="test_streamlit_pdf" name="test_streamlit_pdf_integration" time="0.002" /><testcase classname="test_templates" name="test_template_rendering" time="0.056" /><testcase classname="test_zero_rate_fix" name="test_zero_rate_handling" time="0.003" /><testcase classname="test_zero_rate_handling" name="test_zero_rate_item_handling" time="0.001" /><testcase classname="tests.test_modularization.TestModularization" name="test_app_module_import" time="0.001" /><testcase classname="tests.test_modularization.TestModularization" name="test_core_module_import" time="0.000" /><testcase classname="tests.test_modularization.TestModularization" name="test_exports_module_import" time="0.000" /><testcase classname="tests.test_modularization.TestModularization" name="test_number_to_words_function" time="0.001" /><testcase classname="tests.test_modularization.TestModularization" name="test_safe_float_function" time="0.000" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_advanced_formats_import" time="0.004" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_batch_processor_import" time="0.013" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_css_minification" time="0.004" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_frontend_optimizer_import" time="0.000" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_js_minification" time="0.001" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_json_generation" time="0.001" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_redis_cache_import" time="0.004" /><testcase classname="tests.test_optimizations.TestOptimizations" name="test_xml_generation" time="0.001" /></testsuite></testsuites>

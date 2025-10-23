@@ -1,0 +1,120 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.3, pytest-8.4.2, pluggy-1.6.0
+rootdir: /workspace
+collected 48 items / 10 errors
+
+==================================== ERRORS ====================================
+_______________________ ERROR collecting minimal_test.py _______________________
+ImportError while importing test module '/workspace/minimal_test.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+minimal_test.py:2: in <module>
+    from jinja2 import Environment, FileSystemLoader
+E   ModuleNotFoundError: No module named 'jinja2'
+______________________ ERROR collecting template_test.py _______________________
+ImportError while importing test module '/workspace/template_test.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+template_test.py:2: in <module>
+    from jinja2 import Environment, FileSystemLoader
+E   ModuleNotFoundError: No module named 'jinja2'
+____________________ ERROR collecting test_certificates.py _____________________
+ImportError while importing test module '/workspace/test_certificates.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_certificates.py:6: in <module>
+    from jinja2 import Environment, FileSystemLoader
+E   ModuleNotFoundError: No module named 'jinja2'
+____________________ ERROR collecting test_input_output.py _____________________
+ImportError while importing test module '/workspace/test_input_output.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_input_output.py:9: in <module>
+    import pandas as pd
+E   ModuleNotFoundError: No module named 'pandas'
+_________________ ERROR collecting test_original_templates.py __________________
+ImportError while importing test module '/workspace/test_original_templates.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_original_templates.py:5: in <module>
+    from jinja2 import Environment, FileSystemLoader
+E   ModuleNotFoundError: No module named 'jinja2'
+_______________________ ERROR collecting test_pdfkit.py ________________________
+ImportError while importing test module '/workspace/test_pdfkit.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_pdfkit.py:4: in <module>
+    import pdfkit
+E   ModuleNotFoundError: No module named 'pdfkit'
+__________________ ERROR collecting test_specification_fix.py __________________
+ImportError while importing test module '/workspace/test_specification_fix.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_specification_fix.py:4: in <module>
+    import pandas as pd
+E   ModuleNotFoundError: No module named 'pandas'
+__________________ ERROR collecting test_streamlit_deploy.py ___________________
+ImportError while importing test module '/workspace/test_streamlit_deploy.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_streamlit_deploy.py:9: in <module>
+    import requests
+E   ModuleNotFoundError: No module named 'requests'
+______________________ ERROR collecting test_templates.py ______________________
+ImportError while importing test module '/workspace/test_templates.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_templates.py:5: in <module>
+    from jinja2 import Environment, FileSystemLoader
+E   ModuleNotFoundError: No module named 'jinja2'
+____________________ ERROR collecting test_zero_rate_fix.py ____________________
+ImportError while importing test module '/workspace/test_zero_rate_fix.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test_zero_rate_fix.py:4: in <module>
+    import pandas as pd
+E   ModuleNotFoundError: No module named 'pandas'
+-- generated xml file: /workspace/All_Outputs/tests_20251023_031943/junit.xml --
+=========================== short test summary info ============================
+ERROR minimal_test.py
+ERROR template_test.py
+ERROR test_certificates.py
+ERROR test_input_output.py
+ERROR test_original_templates.py
+ERROR test_pdfkit.py
+ERROR test_specification_fix.py
+ERROR test_streamlit_deploy.py
+ERROR test_templates.py
+ERROR test_zero_rate_fix.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 10 errors during collection !!!!!!!!!!!!!!!!!!!
+============================== 10 errors in 0.35s ==============================

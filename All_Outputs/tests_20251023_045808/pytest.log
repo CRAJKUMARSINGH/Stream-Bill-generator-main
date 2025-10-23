@@ -1,0 +1,978 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.3, pytest-8.4.2, pluggy-1.6.0
+rootdir: /workspace
+collected 58 items
+
+comprehensive_test.py ..                                                 [  3%]
+diagnose_batch_test.py .                                                 [  5%]
+direct_test.py .                                                         [  6%]
+minimal_test.py .                                                        [  8%]
+streamlit_deployability_test.py ......                                   [ 18%]
+test_all_batch_files.py ..                                               [ 22%]
+test_basic_functionality.py ..                                           [ 25%]
+test_certificates.py .                                                   [ 27%]
+test_cloud_deployment.py ...                                             [ 32%]
+test_deployment.py .                                                     [ 34%]
+test_deviation_statement_zero_rate.py .                                  [ 36%]
+test_enhanced_pdf.py .                                                   [ 37%]
+test_essential_packages.py .                                             [ 39%]
+test_float_conversion.py .                                               [ 41%]
+test_imports.py .                                                        [ 43%]
+test_input_output.py .                                                   [ 44%]
+test_launch.py .                                                         [ 46%]
+test_modular_app.py ..                                                   [ 50%]
+test_modular_fixes.py ...                                                [ 55%]
+test_original_templates.py .                                             [ 56%]
+test_pdfkit.py s                                                         [ 58%]
+test_pdfkit_import.py ..                                                 [ 62%]
+test_requirements.py .                                                   [ 63%]
+test_specification_fix.py .                                              [ 65%]
+test_streamlit_deploy.py ..                                              [ 68%]
+test_streamlit_imports.py .                                              [ 70%]
+test_streamlit_pdf.py .                                                  [ 72%]
+test_templates.py .                                                      [ 74%]
+test_zero_rate_fix.py .                                                  [ 75%]
+test_zero_rate_handling.py .                                             [ 77%]
+tests/test_modularization.py .....                                       [ 86%]
+tests/test_optimizations.py ........                                     [100%]
+
+=============================== warnings summary ===============================
+comprehensive_test.py::test_safe_float
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but comprehensive_test.py::test_safe_float returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+comprehensive_test.py::test_sum_with_safe_float
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but comprehensive_test.py::test_sum_with_safe_float returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+direct_test.py::test_enhanced_batch_tester
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but direct_test.py::test_enhanced_batch_tester returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+minimal_test.py::test_template_loading
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but minimal_test.py::test_template_loading returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_python_environment
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_python_environment returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_required_dependencies
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_required_dependencies returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_module_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_module_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_template_files
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_template_files returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_streamlit_syntax
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_streamlit_syntax returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+streamlit_deployability_test.py::test_actual_streamlit_import
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but streamlit_deployability_test.py::test_actual_streamlit_import returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_all_batch_files.py::test_batch_file_syntax
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_all_batch_files.py::test_batch_file_syntax returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_all_batch_files.py::test_batch_file_execution
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_all_batch_files.py::test_batch_file_execution returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_basic_functionality.py::test_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_basic_functionality.py::test_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_basic_functionality.py::test_function_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_basic_functionality.py::test_function_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_certificates.py::test_certificate_templates
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_certificates.py::test_certificate_templates returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_cloud_deployment.py::test_basic_requirements
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_cloud_deployment.py::test_basic_requirements returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_cloud_deployment.py::test_environment_detection
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_cloud_deployment.py::test_environment_detection returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_cloud_deployment.py::test_pdf_generation
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_cloud_deployment.py::test_pdf_generation returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_deployment.py::test_deployment
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_deployment.py::test_deployment returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_enhanced_pdf.py::test_enhanced_pdf_generation
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_enhanced_pdf.py::test_enhanced_pdf_generation returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_essential_packages.py::test_essential_packages
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_essential_packages.py::test_essential_packages returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_imports.py::test_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_imports.py::test_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_input_output.py::test_different_inputs
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_input_output.py::test_different_inputs returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_launch.py::test_app_launch
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_launch.py::test_app_launch returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_modular_app.py::test_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_modular_app.py::test_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_modular_app.py::test_module_structure
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_modular_app.py::test_module_structure returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_modular_fixes.py::test_file_structure
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_modular_fixes.py::test_file_structure returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_modular_fixes.py::test_module_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_modular_fixes.py::test_module_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_modular_fixes.py::test_old_references_removed
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_modular_fixes.py::test_old_references_removed returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_original_templates.py::test_original_template_rendering
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_original_templates.py::test_original_template_rendering returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_pdfkit_import.py::test_pdfkit_import
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_pdfkit_import.py::test_pdfkit_import returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_pdfkit_import.py::test_renderers_import
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_pdfkit_import.py::test_renderers_import returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_requirements.py::test_requirements
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_requirements.py::test_requirements returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_streamlit_deploy.py::test_import_modular_app
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_streamlit_deploy.py::test_import_modular_app returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_streamlit_deploy.py::test_jinja2_templates
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_streamlit_deploy.py::test_jinja2_templates returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_streamlit_imports.py::test_imports
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_streamlit_imports.py::test_imports returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_streamlit_pdf.py::test_streamlit_pdf_integration
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_streamlit_pdf.py::test_streamlit_pdf_integration returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+test_templates.py::test_template_rendering
+  /home/ubuntu/.local/lib/python3.13/site-packages/_pytest/python.py:161: PytestReturnNotNoneWarning: Test functions should return None, but test_templates.py::test_template_rendering returned <class 'bool'>.
+  Did you mean to use `assert` instead of `return`?
+  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+_______________________________ test_safe_float ________________________________
+----------------------------- Captured stdout call -----------------------------
+Testing safe_float function...
+  ✓ None value: None -> 0.0
+  ✓ Empty string: '' -> 0.0
+  ✓ Whitespace only: ' ' -> 0.0
+  ✓ Multiple whitespace: '  ' -> 0.0
+  ✓ Zero as string: '0' -> 0.0
+  ✓ Integer as string: '123' -> 123.0
+  ✓ Decimal as string: '123.45' -> 123.45
+  ✓ Number with whitespace: ' 123 ' -> 123.0
+  ✓ Number with comma: '1,234' -> 1234.0
+  ✓ Decimal with comma: '1,234.56' -> 1234.56
+  ✓ Invalid string: 'abc' -> 0.0
+  ✓ Integer: 123 -> 123.0
+  ✓ Float: 123.45 -> 123.45
+  ✓ List (invalid type): [] -> 0.0
+  ✓ Dict (invalid type): {} -> 0.0
+___________________________ test_sum_with_safe_float ___________________________
+----------------------------- Captured stdout call -----------------------------
+
+Testing sum operations with safe_float...
+  ✓ Sum test passed: 40060.5
+_____________________________ test_simple_function _____________________________
+----------------------------- Captured stdout call -----------------------------
+=== Function Test ===
+✗ Failed to import validate_excel_file: No module named 'validate_and_process_tests'
+
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/workspace/diagnose_batch_test.py", line 84, in test_simple_function
+    from validate_and_process_tests import validate_excel_file
+ModuleNotFoundError: No module named 'validate_and_process_tests'
+__________________________ test_enhanced_batch_tester __________________________
+----------------------------- Captured stdout call -----------------------------
+Testing enhanced batch tester directly...
+✗ Error running batch_process_all_test_files: No module named 'enhanced_batch_tester'
+Full traceback:
+----------------------------- Captured stderr call -----------------------------
+Traceback (most recent call last):
+  File "/workspace/direct_test.py", line 13, in test_enhanced_batch_tester
+    from enhanced_batch_tester import batch_process_all_test_files
+ModuleNotFoundError: No module named 'enhanced_batch_tester'
+____________________________ test_template_loading _____________________________
+----------------------------- Captured stdout call -----------------------------
+✓ Successfully loaded first_page.html
+✓ Successfully loaded deviation_statement.html
+✓ Successfully loaded extra_items.html
+✓ Successfully loaded last_page.html
+✓ Successfully loaded note_sheet.html
+All templates loaded successfully!
+___________________________ test_python_environment ____________________________
+----------------------------- Captured stdout call -----------------------------
+1. Testing Python Environment
+------------------------------
+  ✅ Python: Python 3.13.3
+__________________________ test_required_dependencies __________________________
+----------------------------- Captured stdout call -----------------------------
+
+2. Testing Required Dependencies
+--------------------------------
+  ✅ streamlit
+  ✅ pandas
+  ✅ pdfkit
+  ✅ python-docx
+  ✅ num2words
+  ✅ jinja2
+  ✅ pypdf
+  ✅ numpy
+_____________________________ test_module_imports ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+3. Testing Application Module Imports
+--------------------------------------
+  ✅ main function
+  ✅ bill processor module
+  ✅ export renderers
+  ✅ cache utilities
+  ✅ configuration settings
+_____________________________ test_template_files ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+4. Testing Template Files
+------------------------
+  ✅ first_page.html
+  ✅ deviation_statement.html
+  ✅ extra_items.html
+  ✅ last_page.html
+  ✅ note_sheet.html
+____________________________ test_streamlit_syntax _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+5. Testing Streamlit App Syntax
+------------------------------
+  ✅ app/main.py syntax is correct
+_________________________ test_actual_streamlit_import _________________________
+----------------------------- Captured stdout call -----------------------------
+
+6. Testing Actual Streamlit App Import
+--------------------------------------
+  ✅ app/main.py imported successfully
+  ✅ main function is properly defined
+____________________________ test_batch_file_syntax ____________________________
+----------------------------- Captured stdout call -----------------------------
+Testing batch file syntax...
+  ✅ TEST_STREAMLIT_CLOUD_FIX.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ ZZLAUNCH_MONITORING_DASHBOARD.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_LAUNCH.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_MODULAR_APP.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ LAUNCH_MONITORING_DASHBOARD.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_CLOUD_DEPLOYMENT.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ 🚀_LAUNCH_APP.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_ALL_BATCH_FILES.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_MODULAR_FIXES.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ LAUNCH_STREAMLIT_APP.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ VALIDATE_DEPLOYMENT.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ ZZLAUNCH_STREAMLIT_APP.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ FINAL_VALIDATION.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_STREAMLIT_DEPLOYABILITY.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ install_advanced_packages.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ TEST_IMPORTS.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+  ✅ ZZLAUNCH_ENHANCED_APP.bat exists
+  ✅ Has '@echo off': True
+  ✅ Has 'pause': True
+__________________________ test_batch_file_execution ___________________________
+----------------------------- Captured stdout call -----------------------------
+Testing execution patterns of batch files...
+  ✅ TEST_STREAMLIT_CLOUD_FIX.bat contains Python commands: True
+  ✅ TEST_STREAMLIT_CLOUD_FIX.bat contains pip commands: False
+  ✅ TEST_STREAMLIT_CLOUD_FIX.bat contains Streamlit commands: True
+  ✅ ZZLAUNCH_MONITORING_DASHBOARD.bat contains Python commands: True
+  ✅ ZZLAUNCH_MONITORING_DASHBOARD.bat contains pip commands: False
+  ✅ ZZLAUNCH_MONITORING_DASHBOARD.bat contains Streamlit commands: True
+  ✅ TEST_LAUNCH.bat contains Python commands: True
+  ✅ TEST_LAUNCH.bat contains pip commands: False
+  ✅ TEST_LAUNCH.bat contains Streamlit commands: False
+  ✅ TEST_MODULAR_APP.bat contains Python commands: True
+  ✅ TEST_MODULAR_APP.bat contains pip commands: False
+  ✅ TEST_MODULAR_APP.bat contains Streamlit commands: False
+  ✅ LAUNCH_MONITORING_DASHBOARD.bat contains Python commands: True
+  ✅ LAUNCH_MONITORING_DASHBOARD.bat contains pip commands: False
+  ✅ LAUNCH_MONITORING_DASHBOARD.bat contains Streamlit commands: True
+  ✅ TEST_CLOUD_DEPLOYMENT.bat contains Python commands: True
+  ✅ TEST_CLOUD_DEPLOYMENT.bat contains pip commands: False
+  ✅ TEST_CLOUD_DEPLOYMENT.bat contains Streamlit commands: True
+  ✅ 🚀_LAUNCH_APP.bat contains Python commands: True
+  ✅ 🚀_LAUNCH_APP.bat contains pip commands: False
+  ✅ 🚀_LAUNCH_APP.bat contains Streamlit commands: True
+  ✅ TEST_ALL_BATCH_FILES.bat contains Python commands: True
+  ✅ TEST_ALL_BATCH_FILES.bat contains pip commands: False
+  ✅ TEST_ALL_BATCH_FILES.bat contains Streamlit commands: False
+  ✅ TEST_MODULAR_FIXES.bat contains Python commands: True
+  ✅ TEST_MODULAR_FIXES.bat contains pip commands: False
+  ✅ TEST_MODULAR_FIXES.bat contains Streamlit commands: False
+  ✅ LAUNCH_STREAMLIT_APP.bat contains Python commands: True
+  ✅ LAUNCH_STREAMLIT_APP.bat contains pip commands: False
+  ✅ LAUNCH_STREAMLIT_APP.bat contains Streamlit commands: True
+  ✅ VALIDATE_DEPLOYMENT.bat contains Python commands: True
+  ✅ VALIDATE_DEPLOYMENT.bat contains pip commands: False
+  ✅ VALIDATE_DEPLOYMENT.bat contains Streamlit commands: False
+  ✅ ZZLAUNCH_STREAMLIT_APP.bat contains Python commands: True
+  ✅ ZZLAUNCH_STREAMLIT_APP.bat contains pip commands: False
+  ✅ ZZLAUNCH_STREAMLIT_APP.bat contains Streamlit commands: True
+  ✅ FINAL_VALIDATION.bat contains Python commands: True
+  ✅ FINAL_VALIDATION.bat contains pip commands: False
+  ✅ FINAL_VALIDATION.bat contains Streamlit commands: False
+  ✅ TEST_STREAMLIT_DEPLOYABILITY.bat contains Python commands: True
+  ✅ TEST_STREAMLIT_DEPLOYABILITY.bat contains pip commands: False
+  ✅ TEST_STREAMLIT_DEPLOYABILITY.bat contains Streamlit commands: True
+  ✅ install_advanced_packages.bat contains Python commands: False
+  ✅ install_advanced_packages.bat contains pip commands: True
+  ✅ install_advanced_packages.bat contains Streamlit commands: False
+  ✅ TEST_IMPORTS.bat contains Python commands: True
+  ✅ TEST_IMPORTS.bat contains pip commands: False
+  ✅ TEST_IMPORTS.bat contains Streamlit commands: False
+  ✅ ZZLAUNCH_ENHANCED_APP.bat contains Python commands: True
+  ✅ ZZLAUNCH_ENHANCED_APP.bat contains pip commands: False
+  ✅ ZZLAUNCH_ENHANCED_APP.bat contains Streamlit commands: True
+_________________________________ test_imports _________________________________
+----------------------------- Captured stdout call -----------------------------
+Testing imports...
+✓ app/main.py imported successfully
+✓ core/computations/bill_processor.py imported successfully
+✓ exports/renderers.py imported successfully
+____________________________ test_function_imports _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Testing function imports...
+✓ process_bill function imported successfully
+⚠ enhanced_batch_tester not found (this is okay)
+__________________________ test_certificate_templates __________________________
+----------------------------- Captured stdout call -----------------------------
+=== Testing Certificate II Template ===
+✅ Certificate II template rendered successfully
+HTML length: 4046 characters
+✅ Measurement officer name found
+✅ Measurement date found
+✅ Officer name found
+✅ Authorising officer name found
+
+=== Testing Certificate III Template ===
+✅ Certificate III template rendered successfully
+HTML length: 6997 characters
+✅ Grand total found
+✅ Payable amount found
+✅ Amount in words found
+
+🎉 All certificate templates render successfully!
+___________________________ test_basic_requirements ____________________________
+----------------------------- Captured stdout call -----------------------------
+✓ streamlit - OK
+✓ pandas - OK
+✓ openpyxl - OK
+✓ pdfkit - OK
+✓ docx - OK
+✓ num2words - OK
+✓ jinja2 - OK
+✓ pypdf - OK
+✓ numpy - OK
+__________________________ test_environment_detection __________________________
+----------------------------- Captured stdout call -----------------------------
+Cloud environment detection: True
+✓ Cloud environment correctly detected
+_____________________________ test_pdf_generation ______________________________
+----------------------------- Captured stdout call -----------------------------
+Failed to generate PDF with pdfkit: Could not render template: 'dict object' has no attribute 'extra_items_sum'
+✗ PDF generation failed: Failed to generate PDF with any available engine
+_______________________________ test_deployment ________________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Streamlit Cloud Deployment Readiness...
+==================================================
+1. Checking Python path...
+   Current directory: /workspace
+   Python path includes current directory: True
+
+2. Testing module imports...
+   ✅ core.computations.bill_processor imports successful
+   ✅ exports.renderers imports successful
+   ✅ core.streamlit_pdf_integration imports successful
+
+3. Checking requirements file...
+   ✅ All required packages found in requirements.txt
+
+4. Checking file structure...
+   ✅ All required files present
+
+5. Checking package initialization files...
+   ✅ All __init__.py files present
+
+==================================================
+🎉 Deployment readiness check completed!
+All critical components are ready for Streamlit Cloud deployment.
+_________________ test_deviation_statement_zero_rate_handling __________________
+----------------------------- Captured stdout call -----------------------------
+Testing Deviation Statement Zero Rate Item Handling
+=======================================================
+
+1. Deviation Statement Zero Rate Item:
+   Input Data:
+   - item_no: 10
+   - description: Specialized Equipment
+   - unit: Unit
+   - qty_wo: 5.0
+   - rate: 0
+   - amt_wo: 0
+   - qty_bill: 5.0
+   - amt_bill: 0
+   - excess_qty: 0
+   - excess_amt: 0
+   - saving_qty: 0
+   - saving_amt: 0
+
+   Processing Logic:
+   - Rate value: 0.0
+   - Condition (rate is None or rate == 0): True
+
+   Output (Zero Rate Handling):
+   ✅ Item No. (serial_no): '10'
+   ❌ Description: ''
+   ❌ Unit: ''
+   ❌ Qty as per Work Order: ''
+   ❌ Rate: ''
+   ❌ Amt as per Work Order: ''
+   ❌ Qty Executed: ''
+   ❌ Amt as per Executed: ''
+   ❌ Excess Qty: ''
+   ❌ Excess Amt: ''
+   ❌ Saving Qty: ''
+   ❌ Saving Amt: ''
+
+2. Deviation Statement Normal Rate Item (for comparison):
+   Input Data:
+   - Item No.: 15
+   - Description: Standard Materials
+   - Unit: Kilogram
+   - Qty as per Work Order: 100.0
+   - Rate: 25.50
+   - Qty Executed: 95.0
+
+   Calculated Values:
+   - Amt as per Work Order: 2550
+   - Amt as per Executed: 2422
+   - Excess Qty: 0
+   - Excess Amt: 0
+   - Saving Qty: 5.0
+   - Saving Amt: 128
+
+   Processing Logic:
+   - Rate value: 25.5
+   - Condition (rate is None or rate == 0): False
+
+   Output (Normal Rate Handling):
+   ✅ Item No. (serial_no): '15'
+   ✅ Description: 'Standard Materials'
+   ✅ Unit: 'Kilogram'
+   ✅ Qty as per Work Order: '100.0'
+   ✅ Rate: '25.5'
+   ✅ Amt as per Work Order: '2550'
+   ✅ Qty Executed: '95.0'
+   ✅ Amt as per Executed: '2422'
+   ✅ Excess Qty: '0'
+   ✅ Excess Amt: '0'
+   ✅ Saving Qty: '5.0'
+   ✅ Saving Amt: '128'
+
+=======================================================
+Deviation Statement Zero Rate Handling Test Complete
+✅ Confirmed: Specification compliance verified
+❌ Blank fields correctly left empty for zero rate items
+_________________________ test_enhanced_pdf_generation _________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Enhanced PDF Generation...
+========================================
+✅ Enhanced PDF Generator imported successfully
+✅ EnhancedPDFGenerator initialized successfully
+Available engines: ['pdfkit']
+Failed to generate PDF with pdfkit: Could not render template: 'dict object' has no attribute 'extra_items_sum'
+❌ Failed to generate PDF: Failed to generate PDF with any available engine
+___________________________ test_essential_packages ____________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Essential Package Imports
+===================================
+  ✅ streamlit
+  ✅ pandas
+  ✅ openpyxl
+  ✅ pdfkit
+  ✅ python-docx
+  ✅ num2words
+  ✅ jinja2
+  ✅ pypdf
+  ✅ numpy
+
+Results: 9/9 packages imported successfully
+🎉 All essential packages imported successfully!
+____________________________ test_float_conversion _____________________________
+----------------------------- Captured stdout call -----------------------------
+Testing float conversion fix:
+  ✓ Input: '' -> Output: 0.0 (Expected: 0.0)
+  ✓ Input: '  ' -> Output: 0.0 (Expected: 0.0)
+  ✓ Input: '0' -> Output: 0.0 (Expected: 0.0)
+  ✓ Input: '123' -> Output: 123.0 (Expected: 123.0)
+  ✓ Input: '123.45' -> Output: 123.45 (Expected: 123.45)
+  ✓ Input: ' 123 ' -> Output: 123.0 (Expected: 123.0)
+  ✓ Input: '1,234' -> Output: 1234.0 (Expected: 1234.0)
+  ✓ Input: 'abc' -> Output: 0.0 (Expected: 0.0)
+  ✓ Input: 123 -> Output: 123.0 (Expected: 123.0)
+  ✓ Input: 123.45 -> Output: 123.45 (Expected: 123.45)
+  ✓ Input: None -> Output: 0.0 (Expected: 0.0)
+
+All tests completed!
+_________________________________ test_imports _________________________________
+----------------------------- Captured stdout call -----------------------------
+✓ Core computation module imports successful
+✓ Exports module imports successful
+✓ App module imports successful
+✓ Data module imports successful
+✓ Config module imports successful
+____________________________ test_different_inputs _____________________________
+----------------------------- Captured stdout call -----------------------------
+Testing with first set of values...
+Testing with second set of values...
+
+Comparing results...
+First Page Data 1 Grand Total: 9250
+First Page Data 2 Grand Total: 13875
+✅ Different inputs produce different outputs - this is correct behavior
+_______________________________ test_app_launch ________________________________
+----------------------------- Captured stdout call -----------------------------
+✓ App module can be imported successfully
+✓ Core computation module can be imported successfully
+✓ Export module can be imported successfully
+✓ templates/first_page.html exists
+✓ templates/deviation_statement.html exists
+✓ templates/extra_items.html exists
+✓ templates/last_page.html exists
+✓ templates/note_sheet.html exists
+
+✅ All tests passed! The app should launch successfully.
+_________________________________ test_imports _________________________________
+----------------------------- Captured stdout call -----------------------------
+✓ Core computation module imports successful
+✓ Exports module imports successful
+✓ App module imports successful
+____________________________ test_module_structure _____________________________
+----------------------------- Captured stdout call -----------------------------
+✓ Found file: core/computations/bill_processor.py
+✓ Found file: exports/renderers.py
+✓ Found file: app/main.py
+✓ Found file: config/settings.py
+✓ Found file: data/cache_utils.py
+_____________________________ test_file_structure ______________________________
+----------------------------- Captured stdout call -----------------------------
+Testing file structure...
+  ✅ app/main.py
+  ✅ core/computations/bill_processor.py
+  ✅ exports/renderers.py
+  ✅ templates/first_page.html
+  ✅ templates/deviation_statement.html
+  ✅ templates/extra_items.html
+  ✅ templates/last_page.html
+  ✅ templates/note_sheet.html
+_____________________________ test_module_imports ______________________________
+----------------------------- Captured stdout call -----------------------------
+
+Testing module imports...
+  ✅ app/main.py
+  ✅ core/computations/bill_processor.py
+  ✅ exports/renderers.py
+_________________________ test_old_references_removed __________________________
+----------------------------- Captured stdout call -----------------------------
+
+Testing for old references...
+  ⚠️  streamlit_app.py still exists (should be removed)
+_______________________ test_original_template_rendering _______________________
+----------------------------- Captured stdout call -----------------------------
+✅ first_page.html rendered successfully (10577 characters)
+❌ deviation_statement.html rendering failed: '>' not supported between instances of 'str' and 'int'
+✅ extra_items.html rendered successfully (1444 characters)
+✅ last_page.html rendered successfully (2645 characters)
+✅ note_sheet.html rendered successfully (4970 characters)
+______________________________ test_pdfkit_import ______________________________
+----------------------------- Captured stdout call -----------------------------
+Testing pdfkit import...
+✅ pdfkit imported successfully
+⚠️  wkhtmltopdf not available: No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+____________________________ test_renderers_import _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+Testing exports.renderers import...
+✅ exports.renderers imported successfully
+______________________________ test_requirements _______________________________
+----------------------------- Captured stdout call -----------------------------
+✅ streamlit - OK
+✅ pandas - OK
+✅ openpyxl - OK
+✅ numpy - OK
+✅ docx - OK
+✅ jinja2 - OK
+✅ xhtml2pdf - OK
+✅ reportlab - OK
+✅ bs4 - OK
+✅ lxml - OK
+✅ num2words - OK
+✅ PIL - OK
+
+🎉 All required packages are available!
+________________________ test_specification_population _________________________
+----------------------------- Captured stdout call -----------------------------
+Testing specification population for deviation statement...
+  ✓ Non-zero rate item: Main Specification >> Nos >> 10 >> 1000
+    Main spec: Main Specification
+    Additional specs: ['Nos', '10', '1000']
+  ✓ Zero rate item: Description correctly left blank
+
+Test completed!
+___________________________ test_import_modular_app ____________________________
+----------------------------- Captured stdout call -----------------------------
+
+5. Testing Modular App Import
+------------------------------
+  ✅ app/main.py imported successfully
+  ✅ core/computations/bill_processor.py imported successfully
+  ✅ exports/renderers.py imported successfully
+____________________________ test_jinja2_templates _____________________________
+----------------------------- Captured stdout call -----------------------------
+
+7. Testing Jinja2 Templates
+-------------------------
+  ✅ first_page.html loaded successfully
+  ✅ deviation_statement.html loaded successfully
+  ✅ extra_items.html loaded successfully
+  ✅ last_page.html loaded successfully
+  ✅ note_sheet.html loaded successfully
+_________________________________ test_imports _________________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Streamlit Cloud imports...
+Current sys.path: ['/workspace', '/workspace', '/workspace', '/workspace', '/workspace', '/workspace/app', '/workspace', '/', '/workspace/tests/..', '/', '/workspace/tests/..', '/', '/workspace', '/', '/workspace/..', '/', '/workspace', '/usr/lib/python313.zip', '/usr/lib/python3.13', '/usr/lib/python3.13/lib-dynload', '/home/ubuntu/.local/lib/python3.13/site-packages', '/usr/local/lib/python3.13/dist-packages', '/usr/lib/python3/dist-packages', '/workspace', '/workspace']
+Current directory: /workspace
+Parent directory: /
+Testing core.computations.bill_processor import...
+✓ core.computations.bill_processor imports successful
+Testing exports.renderers import...
+✓ exports.renderers imports successful
+Testing core.streamlit_pdf_integration import...
+✓ core.streamlit_pdf_integration imports successful
+
+✅ All imports successful!
+________________________ test_streamlit_pdf_integration ________________________
+----------------------------- Captured stdout call -----------------------------
+✅ Successfully imported StreamlitPDFManager and PDFGenerator
+✅ PDF Manager initialized - Cloud mode: True
+✅ Temporary directory: /workspace/temp_pdfs
+✅ PDF Generator initialized - Available engines: ['reportlab', 'xhtml2pdf', 'pdfkit']
+✅ Streamlit PDF integration is working correctly
+___________________________ test_template_rendering ____________________________
+----------------------------- Captured stdout call -----------------------------
+❌ first_page.html rendering failed: 'builtin_function_or_method' object is not iterable
+❌ deviation_statement.html rendering failed: 'builtin_function_or_method' object is not iterable
+❌ extra_items.html rendering failed: 'builtin_function_or_method' object is not iterable
+❌ note_sheet.html rendering failed: 'dict object' has no attribute 'payable'
+❌ last_page.html rendering failed: 'builtin_function_or_method' object is not iterable
+___________________________ test_zero_rate_handling ____________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Zero Rate Item Handling
+===================================
+Zero Rate Item (Row 1):
+  ✓ Serial No: '1' (populated)
+  ✓ Description: 'Main Specification' (populated)
+  ✓ Remark: 'Remark 1' (populated)
+  ✓ Unit: '' (blank as required)
+  ✓ Quantity: '' (blank as required)
+  ✓ Rate: '' (blank as required)
+  ✓ Amount: '' (blank as required)
+
+Non-Zero Rate Item (Row 2):
+  ✓ Serial No: '2' (populated)
+  ✓ Description: 'Another Item' (populated with all specs)
+  ✓ Unit: 'Mtr' (populated)
+  ✓ Remark: 'Remark 2' (populated)
+  ✓ Quantity: populated (not blank)
+  ✓ Rate: populated (not blank)
+  ✓ Amount: populated (not blank)
+
+Blank Rate Item (Row 3):
+  ✓ Serial No: '3' (populated)
+  ✓ Description: 'Third Item' (populated)
+  ✓ Remark: 'Remark 3' (populated)
+  ✓ Unit: '' (blank as required)
+  ✓ Quantity: '' (blank as required)
+  ✓ Rate: '' (blank as required)
+  ✓ Amount: '' (blank as required)
+
+Summary:
+✓ Zero rate items: Item No., Description*, and Remark populated; others blank
+✓ Non-zero rate items: ALL specifications populated for meaningful bill amounts
+_________________________ test_zero_rate_item_handling _________________________
+----------------------------- Captured stdout call -----------------------------
+Testing Zero Rate Item Handling
+========================================
+
+1. Work Order Zero Rate Item:
+   Input - Serial No: 10
+   Input - Description: Concrete Mixture
+   Input - Unit: Cubic Meter
+   Input - Quantity: 15.5
+   Input - Rate: 0
+   Input - Remark: Rate to be determined
+
+   Output (Zero Rate Handling):
+   ✅ Serial No: 10
+   ✅ Description: Concrete Mixture
+   ❌ Unit: ''
+   ❌ Quantity: ''
+   ❌ Rate: ''
+   ✅ Remark: Rate to be determined
+   ❌ Amount: ''
+
+2. Normal Rate Item (for comparison):
+   Input - Serial No: 15
+   Input - Description: Steel Bars
+   Input - Unit: Kilogram
+   Input - Quantity: 100.0
+   Input - Rate: 45.50
+   Input - Remark: Standard rate
+
+   Output (Normal Rate Handling):
+   ✅ Serial No: 15
+   ✅ Description: Steel Bars
+   ✅ Unit: Kilogram
+   ✅ Quantity: 100.0
+   ✅ Rate: 45.5
+   ✅ Remark: Standard rate
+   ✅ Amount: 4550
+
+3. Extra Items Zero Rate Item:
+   Input - Serial No: 5
+   Input - Description: Special Coating
+   Input - Unit: Square Meter
+   Input - Quantity: 25.0
+   Input - Rate: ''
+   Input - Remark: Pending approval
+
+   Output (Zero Rate Handling):
+   ✅ Serial No: 5
+   ✅ Description: Special Coating
+   ❌ Unit: ''
+   ❌ Quantity: ''
+   ❌ Rate: ''
+   ✅ Remark: Pending approval
+   ❌ Amount: ''
+
+========================================
+Zero Rate Handling Test Complete
+✅ Confirmed: Specification compliance verified
+❌ Blank fields correctly left empty for zero rate items
+-- generated xml file: /workspace/All_Outputs/tests_20251023_045808/junit.xml --
+=========================== short test summary info ============================
+PASSED comprehensive_test.py::test_safe_float
+PASSED comprehensive_test.py::test_sum_with_safe_float
+PASSED diagnose_batch_test.py::test_simple_function
+PASSED direct_test.py::test_enhanced_batch_tester
+PASSED minimal_test.py::test_template_loading
+PASSED streamlit_deployability_test.py::test_python_environment
+PASSED streamlit_deployability_test.py::test_required_dependencies
+PASSED streamlit_deployability_test.py::test_module_imports
+PASSED streamlit_deployability_test.py::test_template_files
+PASSED streamlit_deployability_test.py::test_streamlit_syntax
+PASSED streamlit_deployability_test.py::test_actual_streamlit_import
+PASSED test_all_batch_files.py::test_batch_file_syntax
+PASSED test_all_batch_files.py::test_batch_file_execution
+PASSED test_basic_functionality.py::test_imports
+PASSED test_basic_functionality.py::test_function_imports
+PASSED test_certificates.py::test_certificate_templates
+PASSED test_cloud_deployment.py::test_basic_requirements
+PASSED test_cloud_deployment.py::test_environment_detection
+PASSED test_cloud_deployment.py::test_pdf_generation
+PASSED test_deployment.py::test_deployment
+PASSED test_deviation_statement_zero_rate.py::test_deviation_statement_zero_rate_handling
+PASSED test_enhanced_pdf.py::test_enhanced_pdf_generation
+PASSED test_essential_packages.py::test_essential_packages
+PASSED test_float_conversion.py::test_float_conversion
+PASSED test_imports.py::test_imports
+PASSED test_input_output.py::test_different_inputs
+PASSED test_launch.py::test_app_launch
+PASSED test_modular_app.py::test_imports
+PASSED test_modular_app.py::test_module_structure
+PASSED test_modular_fixes.py::test_file_structure
+PASSED test_modular_fixes.py::test_module_imports
+PASSED test_modular_fixes.py::test_old_references_removed
+PASSED test_original_templates.py::test_original_template_rendering
+PASSED test_pdfkit_import.py::test_pdfkit_import
+PASSED test_pdfkit_import.py::test_renderers_import
+PASSED test_requirements.py::test_requirements
+PASSED test_specification_fix.py::test_specification_population
+PASSED test_streamlit_deploy.py::test_import_modular_app
+PASSED test_streamlit_deploy.py::test_jinja2_templates
+PASSED test_streamlit_imports.py::test_imports
+PASSED test_streamlit_pdf.py::test_streamlit_pdf_integration
+PASSED test_templates.py::test_template_rendering
+PASSED test_zero_rate_fix.py::test_zero_rate_handling
+PASSED test_zero_rate_handling.py::test_zero_rate_item_handling
+PASSED tests/test_modularization.py::TestModularization::test_app_module_import
+PASSED tests/test_modularization.py::TestModularization::test_core_module_import
+PASSED tests/test_modularization.py::TestModularization::test_exports_module_import
+PASSED tests/test_modularization.py::TestModularization::test_number_to_words_function
+PASSED tests/test_modularization.py::TestModularization::test_safe_float_function
+PASSED tests/test_optimizations.py::TestOptimizations::test_advanced_formats_import
+PASSED tests/test_optimizations.py::TestOptimizations::test_batch_processor_import
+PASSED tests/test_optimizations.py::TestOptimizations::test_css_minification
+PASSED tests/test_optimizations.py::TestOptimizations::test_frontend_optimizer_import
+PASSED tests/test_optimizations.py::TestOptimizations::test_js_minification
+PASSED tests/test_optimizations.py::TestOptimizations::test_json_generation
+PASSED tests/test_optimizations.py::TestOptimizations::test_redis_cache_import
+PASSED tests/test_optimizations.py::TestOptimizations::test_xml_generation
+SKIPPED [1] test_pdfkit.py:9: wkhtmltopdf not guaranteed on non-Windows runners
+================== 57 passed, 1 skipped, 38 warnings in 4.96s ==================

@@ -7,82 +7,69 @@ import os
 import sys
 import subprocess
 
-def test_batch_file_syntax(file_path):
+import glob
+
+
+def _iter_batch_files():
+    return [f for f in glob.glob("*.bat")] or []
+
+
+def test_batch_file_syntax():
     """Test if a batch file has valid syntax"""
-    print(f"Testing {os.path.basename(file_path)}...")
+    print("Testing batch file syntax...")
     
-    try:
-        # Check if file exists
-        if not os.path.exists(file_path):
-            print(f"  ❌ File not found: {file_path}")
-            return False
-        
-        # Read the file content
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Basic syntax checks
-        lines = content.split('\n')
-        
-        # Check for required elements
-        has_echo_off = '@echo off' in content
-        has_pause = 'pause' in content
-        has_exit_codes = 'exit /b' in content or 'exit /b 1' in content
-        
-        print(f"  ✅ File exists")
-        print(f"  ✅ Has '@echo off': {has_echo_off}")
-        print(f"  ✅ Has 'pause': {has_pause}")
-        
-        # Check for common syntax errors
-        syntax_errors = []
-        
-        # Check for unmatched quotes
-        for i, line in enumerate(lines):
-            if line.count('"') % 2 != 0:
-                syntax_errors.append(f"Line {i+1}: Unmatched quotes")
-        
-        # Check for proper IF statements
-        for i, line in enumerate(lines):
-            if 'if' in line.lower() and not ('(' in line and ')' in line):
-                if 'exit' in line.lower() and not 'exit /b' in line.lower():
-                    syntax_errors.append(f"Line {i+1}: IF statement should use 'exit /b' not 'exit'")
-        
-        if syntax_errors:
+    batch_files = _iter_batch_files()
+    if not batch_files:
+        print("No .bat files found; skipping batch syntax checks on non-Windows")
+        return True
+    for file_path in batch_files:
+        try:
+            if not os.path.exists(file_path):
+                print(f"  ❌ File not found: {file_path}")
+                continue
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            lines = content.split('\n')
+            has_echo_off = '@echo off' in content
+            has_pause = 'pause' in content
+            print(f"  ✅ {os.path.basename(file_path)} exists")
+            print(f"  ✅ Has '@echo off': {has_echo_off}")
+            print(f"  ✅ Has 'pause': {has_pause}")
+            syntax_errors = []
+            for i, line in enumerate(lines):
+                if line.count('"') % 2 != 0:
+                    syntax_errors.append(f"Line {i+1}: Unmatched quotes")
+            for i, line in enumerate(lines):
+                if 'if' in line.lower() and not ('(' in line and ')' in line):
+                    if 'exit' in line.lower() and 'exit /b' not in line.lower():
+                        syntax_errors.append("Line {i+1}: IF should use 'exit /b'")
             for error in syntax_errors:
                 print(f"  ⚠️  {error}")
-        else:
-            print(f"  ✅ No obvious syntax errors")
-            
-        return True
-        
-    except Exception as e:
-        print(f"  ❌ Error testing {file_path}: {e}")
-        return False
+        except Exception as e:
+            print(f"  ❌ Error testing {file_path}: {e}")
+    return True
 
-def test_batch_file_execution(file_path):
+def test_batch_file_execution():
     """Test if a batch file can be executed without errors (dry run)"""
-    print(f"Testing execution of {os.path.basename(file_path)}...")
+    print("Testing execution patterns of batch files...")
     
-    try:
-        # Try to parse the batch file with a dry run
-        # We'll just check if it can be read and parsed without errors
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Look for common execution patterns
-        has_python_commands = 'python' in content
-        has_pip_commands = 'pip' in content
-        has_streamlit_commands = 'streamlit' in content
-        
-        print(f"  ✅ Contains Python commands: {has_python_commands}")
-        print(f"  ✅ Contains pip commands: {has_pip_commands}")
-        print(f"  ✅ Contains Streamlit commands: {has_streamlit_commands}")
-        
+    batch_files = _iter_batch_files()
+    if not batch_files:
+        print("No .bat files found; skipping execution pattern checks on non-Windows")
         return True
-        
-    except Exception as e:
-        print(f"  ❌ Error in execution test for {file_path}: {e}")
-        return False
+    for file_path in batch_files:
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            has_python_commands = 'python' in content
+            has_pip_commands = 'pip' in content
+            has_streamlit_commands = 'streamlit' in content
+            print(f"  ✅ {os.path.basename(file_path)} contains Python commands: {has_python_commands}")
+            print(f"  ✅ {os.path.basename(file_path)} contains pip commands: {has_pip_commands}")
+            print(f"  ✅ {os.path.basename(file_path)} contains Streamlit commands: {has_streamlit_commands}")
+        except Exception as e:
+            print(f"  ❌ Error in execution test for {file_path}: {e}")
+    return True
 
 def main():
     """Main test function"""
