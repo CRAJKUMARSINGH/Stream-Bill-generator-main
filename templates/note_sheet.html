@@ -50,8 +50,8 @@
                 <tr><td>22</td><td>No. Of selection item checked by the EE</td><td></td></tr>
                 <tr><td>23</td><td>Other Inputs</td><td></td></tr>
                 <tr><td></td><td>(A) Is It a Repair / Maintenance Work</td><td>No</td></tr>
-                <tr><td></td><td>(B) Extra Item</td><td>{% if data.extra_item_amount > 0 %}Yes{% else %}No{% endif %}</td></tr>
-                <tr><td></td><td>Amount of Extra Items Rs.</td><td>{{ data.extra_item_amount if data.extra_item_amount > 0 else '' }}</td></tr>
+                <tr><td></td><td>(B) Extra Item</td><td>{% if data.get('extra_item_amount', 0) > 0 %}Yes{% else %}No{% endif %}</td></tr>
+                <tr><td></td><td>Amount of Extra Items Rs.</td><td>{{ data.get('extra_item_amount', '') if data.get('extra_item_amount', 0) > 0 else '' }}</td></tr>
                 <tr><td></td><td>(C) Any Excess Item Executed?</td><td>No</td></tr>
                 <tr><td></td><td>(D) Any Inadvertent Delay in Bill Submission?</td><td>No</td></tr>
                 <tr><td></td><td>Deductions:-</td><td></td></tr>
@@ -62,7 +62,7 @@
                 <tr><td></td><td>Liquidated Damages (Recovery)</td><td></td></tr>
                 <tr><td></td><td>Cheque</td><td>{{ data['totals']['payable'] | int - ((data['totals']['payable'] | int * 0.10) | round(0) + (data['totals']['payable'] | int * 0.02) | round(0) + (data['totals']['payable'] | int * 0.02) | round(0, "ceil") | int // 2 * 2 + (data['totals']['payable'] | int * 0.01) | round(0)) if data.get('totals') else '' }}</td></tr>
                 <tr><td></td><td>Total</td><td>{{ data['totals']['payable'] if data.get('totals') else '' }}</td></tr>
-                <tr><td colspan="3" class="note-cell">{{ data.notes | join('\n') if data.notes else 'Note not available' }}</td></tr>
+                <tr><td colspan="3" class="note-cell">{{ data.get('notes', []) | join('\n') if data.get('notes') else 'Note not available' }}</td></tr>
             </tbody>
         </table>
     </div>
